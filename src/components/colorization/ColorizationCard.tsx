@@ -42,7 +42,7 @@ export function ColorizationCard({
   };
 
   return (
-    <div className="glass-panel rounded-2xl p-4 sm:p-6 space-y-5">
+    <div className="glass-panel rounded-2xl p-4 sm:p-6 space-y-5 max-w-2xl mx-auto">
       {/* Title */}
       <h2 className="text-lg sm:text-xl font-display uppercase tracking-wider text-gold-400">
         {t('colorization.title')}

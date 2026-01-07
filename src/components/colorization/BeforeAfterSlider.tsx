@@ -19,7 +19,6 @@ export function BeforeAfterSlider({
   const [isDragging, setIsDragging] = useState(false);
   const [beforeUrl, setBeforeUrl] = useState<string | null>(null);
   const [afterUrl, setAfterUrl] = useState<string | null>(null);
-  const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Create object URLs for images
@@ -33,18 +32,6 @@ export function BeforeAfterSlider({
       URL.revokeObjectURL(aUrl);
     };
   }, [beforeImage, afterImage]);
-
-  // Track container width
-  useEffect(() => {
-    const updateWidth = () => {
-      if (containerRef.current) {
-        setContainerWidth(containerRef.current.offsetWidth);
-      }
-    };
-    updateWidth();
-    window.addEventListener('resize', updateWidth);
-    return () => window.removeEventListener('resize', updateWidth);
-  }, []);
 
   const updatePosition = useCallback((clientX: number) => {
     if (!containerRef.current) return;
@@ -102,7 +89,7 @@ export function BeforeAfterSlider({
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-square rounded-xl overflow-hidden cursor-ew-resize select-none touch-none"
+      className="relative w-full max-w-lg mx-auto aspect-square rounded-xl overflow-hidden cursor-ew-resize select-none touch-none"
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
     >
@@ -117,13 +104,12 @@ export function BeforeAfterSlider({
       {/* Before image (clipped) */}
       <div
         className="absolute inset-0 overflow-hidden"
-        style={{ width: `${position}%` }}
+        style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
       >
         <img
           src={beforeUrl}
           alt={beforeLabel || t('artifact.before')}
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ width: `${containerWidth}px` }}
           draggable={false}
         />
       </div>

@@ -43,9 +43,9 @@ export function OriginalTab({ image, metadata, artifactName }: OriginalTabProps)
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-2xl mx-auto">
       {/* Original image with frame */}
-      <div className="relative frame-archaeological rounded-xl overflow-hidden">
+      <div className="relative frame-archaeological rounded-xl overflow-hidden max-w-lg mx-auto">
         {imageUrl && (
           <img
             src={imageUrl}

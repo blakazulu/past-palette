@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { ColorVariant, ArtifactImage, ColorScheme } from '@/types/artifact';
 import { useColorize } from '@/hooks/useColorize';
 import {
@@ -26,7 +26,15 @@ export function ColorsTab({
   const [selectedVariant, setSelectedVariant] = useState<ColorVariant | null>(null);
   const [showColorizer, setShowColorizer] = useState(variants.length === 0);
 
-  const { colorize, step, progress, error, reset } = useColorize();
+  const { colorize, step, progress, error, variant: newVariant, reset } = useColorize();
+
+  // Auto-navigate to the new variant when colorization completes
+  useEffect(() => {
+    if (step === 'complete' && newVariant) {
+      setSelectedVariant(newVariant);
+      setShowColorizer(false);
+    }
+  }, [step, newVariant]);
 
   const handleColorize = async (
     scheme: ColorScheme,

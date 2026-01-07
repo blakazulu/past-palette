@@ -52,7 +52,7 @@ export function VariantDetailView({
   };
 
   return (
-    <div className="bg-ancient-900 rounded-2xl overflow-hidden">
+    <div className="bg-ancient-900 rounded-2xl overflow-hidden max-w-2xl mx-auto">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-ancient-700">
         <div>
