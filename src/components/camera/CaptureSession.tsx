@@ -91,38 +91,50 @@ export function CaptureSession() {
   // Show preview if we have a captured image
   if (capturedImage) {
     return (
-      <div className="flex flex-col items-center px-4 py-6">
-        <h1 className="text-xl font-semibold text-ancient-100 mb-6">
-          {t('capture.title')}
-        </h1>
+      <div className="flex flex-col items-center px-4 py-6 opacity-0-initial animate-reveal-up">
+        {/* Page header */}
+        <div className="flex items-center gap-3 mb-8">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-500/20 to-gold-600/10 flex items-center justify-center">
+            <CheckIcon className="w-4 h-4 text-gold-400" />
+          </div>
+          <h1 className="text-xl sm:text-2xl text-obsidian-50">
+            {t('capture.review') || 'Review Photo'}
+          </h1>
+        </div>
 
-        {/* Preview */}
-        <div className="relative w-full max-w-md aspect-[3/4] bg-ancient-950 rounded-2xl overflow-hidden">
+        {/* Preview with archaeological frame */}
+        <div className="relative w-full max-w-md frame-archaeological rounded-xl overflow-hidden mb-8">
           <img
             src={URL.createObjectURL(capturedImage.blob)}
             alt="Captured"
-            className="w-full h-full object-cover"
+            className="w-full aspect-[3/4] object-cover"
           />
+          {/* Subtle overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/30 to-transparent pointer-events-none" />
         </div>
 
         {/* Actions */}
-        <div className="flex gap-4 mt-6 w-full max-w-md">
+        <div className="flex gap-4 w-full max-w-md">
           <button
             onClick={handleRetake}
             disabled={isProcessing}
-            className="flex-1 px-6 py-3 rounded-xl bg-ancient-800 border border-ancient-700 text-ancient-200 font-medium disabled:opacity-50"
+            className="btn-ghost flex-1 flex items-center justify-center gap-2 disabled:opacity-50"
           >
+            <RetakeIcon className="w-4 h-4" />
             {t('capture.retake')}
           </button>
           <button
             onClick={handleUsePhoto}
             disabled={isProcessing}
-            className="flex-1 px-6 py-3 rounded-xl bg-gold-500 text-ancient-900 font-semibold disabled:opacity-50 flex items-center justify-center gap-2"
+            className="btn-gold flex-1 flex items-center justify-center gap-2"
           >
             {isProcessing ? (
-              <div className="w-5 h-5 border-2 border-ancient-900 border-t-transparent rounded-full animate-spin" />
+              <div className="spinner-gold w-5 h-5" style={{ borderWidth: '2px' }} />
             ) : (
-              t('capture.usePhoto')
+              <>
+                <ArrowRightIcon className="w-4 h-4" />
+                {t('capture.usePhoto')}
+              </>
             )}
           </button>
         </div>
@@ -132,47 +144,129 @@ export function CaptureSession() {
 
   return (
     <div className="flex flex-col items-center px-4 py-6">
-      <h1 className="text-xl font-semibold text-ancient-100 mb-4">
-        {t('capture.title')}
-      </h1>
+      {/* Page header */}
+      <div className="flex items-center gap-3 mb-6 opacity-0-initial animate-reveal-up">
+        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-lapis-500/20 to-lapis-600/10 flex items-center justify-center">
+          <CameraIcon className="w-4 h-4 text-lapis-400" />
+        </div>
+        <h1 className="text-xl sm:text-2xl text-obsidian-50">
+          {t('capture.title')}
+        </h1>
+      </div>
 
       {/* Mode toggle */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex p-1 rounded-xl glass-panel mb-6 opacity-0-initial animate-reveal-up delay-100">
         <button
           onClick={() => setMode('camera')}
-          className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+          className={`relative px-5 py-2.5 rounded-lg font-display text-xs tracking-wider uppercase transition-all ${
             mode === 'camera'
-              ? 'bg-gold-500 text-ancient-900'
-              : 'bg-ancient-800 text-ancient-300 hover:bg-ancient-700'
+              ? 'text-obsidian-950'
+              : 'text-obsidian-400 hover:text-obsidian-200'
           }`}
         >
-          {t('capture.takePhoto')}
+          {mode === 'camera' && (
+            <div className="absolute inset-0 bg-gradient-to-r from-gold-500 to-gold-400 rounded-lg" />
+          )}
+          <span className="relative flex items-center gap-2">
+            <CameraSmallIcon className="w-4 h-4" />
+            {t('capture.takePhoto')}
+          </span>
         </button>
         <button
           onClick={() => setMode('upload')}
-          className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+          className={`relative px-5 py-2.5 rounded-lg font-display text-xs tracking-wider uppercase transition-all ${
             mode === 'upload'
-              ? 'bg-gold-500 text-ancient-900'
-              : 'bg-ancient-800 text-ancient-300 hover:bg-ancient-700'
+              ? 'text-obsidian-950'
+              : 'text-obsidian-400 hover:text-obsidian-200'
           }`}
         >
-          {t('capture.uploadImage')}
+          {mode === 'upload' && (
+            <div className="absolute inset-0 bg-gradient-to-r from-gold-500 to-gold-400 rounded-lg" />
+          )}
+          <span className="relative flex items-center gap-2">
+            <UploadSmallIcon className="w-4 h-4" />
+            {t('capture.uploadImage')}
+          </span>
         </button>
       </div>
 
       {/* Error message */}
       {error && (
-        <div className="mb-4 px-4 py-3 rounded-lg bg-error-500/20 border border-error-500/50 text-error-500 text-sm max-w-md w-full text-center">
-          {error}
+        <div className="mb-6 px-5 py-4 rounded-xl glass-panel border-l-2 border-red-500 text-red-400 text-sm max-w-md w-full opacity-0-initial animate-reveal-scale">
+          <div className="flex items-start gap-3">
+            <ErrorIcon className="w-5 h-5 flex-shrink-0 mt-0.5" />
+            <p>{error}</p>
+          </div>
         </div>
       )}
 
       {/* Camera or Upload */}
-      {mode === 'camera' ? (
-        <CameraView onCapture={handleCapture} onError={handleError} />
-      ) : (
-        <FileUpload onFileSelect={handleCapture} onError={handleError} />
-      )}
+      <div className="opacity-0-initial animate-reveal-up delay-200 w-full flex justify-center">
+        {mode === 'camera' ? (
+          <CameraView onCapture={handleCapture} onError={handleError} />
+        ) : (
+          <FileUpload onFileSelect={handleCapture} onError={handleError} />
+        )}
+      </div>
     </div>
+  );
+}
+
+// Icons
+function CameraIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
+    </svg>
+  );
+}
+
+function CameraSmallIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  );
+}
+
+function UploadSmallIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+    </svg>
+  );
+}
+
+function CheckIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+    </svg>
+  );
+}
+
+function RetakeIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+    </svg>
+  );
+}
+
+function ArrowRightIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+    </svg>
+  );
+}
+
+function ErrorIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+    </svg>
   );
 }

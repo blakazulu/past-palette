@@ -1,14 +1,34 @@
 @import 'tailwindcss';
 
 /*
- * Past Palette - Custom Theme
+ * Past Palette - Archaeological Discovery Theme
  *
- * Dark theme inspired by museum aesthetics and ancient artifacts.
- * Color palette derived from reference design featuring Egyptian imagery.
+ * A bold, immersive visual identity evoking the magic of
+ * uncovering ancient treasures and breathing life into artifacts.
+ *
+ * Typography: Cinzel (display) + Cormorant Garamond (body)
+ * Textures: Stone, grain, gold leaf
+ * Mood: Mystery, reverence, wonder
  */
 
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
 @theme {
-  /* Ancient/Base colors - Deep purples and dark tones */
+  /* Base - Deep obsidian with warm undertones */
+  --color-obsidian-50: #f7f6f4;
+  --color-obsidian-100: #e8e5e0;
+  --color-obsidian-200: #d4cfc5;
+  --color-obsidian-300: #b5ad9e;
+  --color-obsidian-400: #8a8072;
+  --color-obsidian-500: #6b6052;
+  --color-obsidian-600: #4d453a;
+  --color-obsidian-700: #2d2821;
+  --color-obsidian-800: #1a1714;
+  --color-obsidian-900: #0d0b09;
+  --color-obsidian-950: #050403;
+
+  /* Ancient - Deep purple-tinged stone */
   --color-ancient-50: #f5f3f7;
   --color-ancient-100: #e8e4ed;
   --color-ancient-200: #d4cce0;
@@ -16,36 +36,61 @@
   --color-ancient-400: #8b7aa3;
   --color-ancient-500: #6d5a87;
   --color-ancient-600: #5a4970;
-  --color-ancient-700: #4a3d5c;
-  --color-ancient-800: #2d2640;
-  --color-ancient-900: #1a1625;
-  --color-ancient-950: #0f0d14;
+  --color-ancient-700: #3d3350;
+  --color-ancient-800: #231e2e;
+  --color-ancient-900: #14111a;
+  --color-ancient-950: #0a090d;
 
-  /* Gold - Sacred and royal accents */
-  --color-gold-50: #fefce8;
-  --color-gold-100: #fef9c3;
-  --color-gold-200: #fef08a;
-  --color-gold-300: #fde047;
-  --color-gold-400: #facc15;
-  --color-gold-500: #daa520;
+  /* Gold - Sacred royal accents with shimmer */
+  --color-gold-50: #fffef5;
+  --color-gold-100: #fefce8;
+  --color-gold-200: #fef3c7;
+  --color-gold-300: #fcd34d;
+  --color-gold-400: #f6c541;
+  --color-gold-500: #d4a418;
   --color-gold-600: #b8860b;
-  --color-gold-700: #a16207;
-  --color-gold-800: #854d0e;
-  --color-gold-900: #713f12;
+  --color-gold-700: #92680a;
+  --color-gold-800: #784f0a;
+  --color-gold-900: #5c3d0b;
 
-  /* Egyptian Blue - Lapis lazuli inspired */
-  --color-egyptian-50: #eff6ff;
-  --color-egyptian-100: #dbeafe;
-  --color-egyptian-200: #bfdbfe;
-  --color-egyptian-300: #93c5fd;
-  --color-egyptian-400: #60a5fa;
-  --color-egyptian-500: #3b82f6;
-  --color-egyptian-600: #1e4d8c;
-  --color-egyptian-700: #1e3a5f;
-  --color-egyptian-800: #1e3a5f;
-  --color-egyptian-900: #0c1929;
+  /* Lapis - Egyptian blue inspired by lapis lazuli */
+  --color-lapis-50: #f0f7ff;
+  --color-lapis-100: #e0effe;
+  --color-lapis-200: #baddfd;
+  --color-lapis-300: #7cc1fc;
+  --color-lapis-400: #369df8;
+  --color-lapis-500: #0d7ee9;
+  --color-lapis-600: #0162c6;
+  --color-lapis-700: #024f9f;
+  --color-lapis-800: #073e75;
+  --color-lapis-900: #0c2d53;
+  --color-lapis-950: #081c35;
 
-  /* Accent - Teal/Cyan for CTAs */
+  /* Terracotta - Warm earth pigments */
+  --color-terra-50: #fef7f4;
+  --color-terra-100: #fceee6;
+  --color-terra-200: #fad5c4;
+  --color-terra-300: #f5b092;
+  --color-terra-400: #e8845a;
+  --color-terra-500: #d4643a;
+  --color-terra-600: #b84a28;
+  --color-terra-700: #973b22;
+  --color-terra-800: #7b3221;
+  --color-terra-900: #652c1f;
+
+  /* Papyrus - Aged scroll tones */
+  --color-papyrus-50: #fdfcf8;
+  --color-papyrus-100: #f9f6eb;
+  --color-papyrus-200: #f2ecd5;
+  --color-papyrus-300: #e8deb8;
+  --color-papyrus-400: #d9c890;
+  --color-papyrus-500: #c9b06a;
+  --color-papyrus-600: #b69750;
+  --color-papyrus-700: #977a42;
+  --color-papyrus-800: #7a6339;
+  --color-papyrus-900: #645232;
+
+  /* Accent - Teal for CTAs */
   --color-accent-50: #ecfeff;
   --color-accent-100: #cffafe;
   --color-accent-200: #a5f3fc;
@@ -57,25 +102,18 @@
   --color-accent-800: #155e75;
   --color-accent-900: #164e63;
 
-  /* Terracotta - Earth tones for warmth */
-  --color-terra-50: #fdf4f3;
-  --color-terra-100: #fce7e4;
-  --color-terra-200: #fad2cc;
-  --color-terra-300: #f5b3a8;
-  --color-terra-400: #ec8676;
-  --color-terra-500: #cd853f;
-  --color-terra-600: #c45c3c;
-  --color-terra-700: #a44a30;
-  --color-terra-800: #88402c;
-  --color-terra-900: #713a2b;
-
   /* Status colors */
   --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
   --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
   --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
 
-  /* Font family */
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Typography */
+  --font-display: 'Cinzel', Georgia, serif;
+  --font-body: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
 }
 
 /* Base styles */
@@ -85,11 +123,22 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
-  background-color: var(--color-ancient-900);
-  color: var(--color-ancient-50);
+  font-family: var(--font-body);
+  background-color: var(--color-obsidian-950);
+  color: var(--color-obsidian-100);
   min-height: 100dvh;
   overflow-x: hidden;
+  font-size: 17px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+/* Headings use display font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 /* Smooth scrolling */
@@ -108,7 +157,7 @@ body {
 
 /* Focus styles for accessibility */
 :focus-visible {
-  outline: 2px solid var(--color-accent-400);
+  outline: 2px solid var(--color-gold-400);
   outline-offset: 2px;
 }
 
@@ -117,28 +166,443 @@ body {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* Custom scrollbar for desktop */
+/* Custom scrollbar */
 @media (min-width: 768px) {
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--color-ancient-800);
+    background: var(--color-obsidian-900);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--color-ancient-600);
-    border-radius: 4px;
+    background: linear-gradient(
+      180deg,
+      var(--color-gold-700) 0%,
+      var(--color-gold-600) 50%,
+      var(--color-gold-700) 100%
+    );
+    border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-ancient-500);
+    background: var(--color-gold-500);
   }
 }
 
-/* Shine animation for progress bars */
+/* ========================================
+   NOISE & TEXTURE OVERLAYS
+   ======================================== */
+
+/* Stone texture noise overlay */
+.texture-stone {
+  position: relative;
+}
+
+.texture-stone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Grain overlay for aged effect */
+.texture-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+  opacity: 0.015;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ========================================
+   GOLD SHIMMER EFFECTS
+   ======================================== */
+
+@keyframes gold-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shimmer-gold {
+  background: linear-gradient(
+    90deg,
+    var(--color-gold-600) 0%,
+    var(--color-gold-300) 25%,
+    var(--color-gold-400) 50%,
+    var(--color-gold-300) 75%,
+    var(--color-gold-600) 100%
+  );
+  background-size: 200% auto;
+  animation: gold-shimmer 3s linear infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Subtle gold pulse for borders */
+@keyframes gold-pulse {
+  0%, 100% {
+    border-color: rgba(212, 164, 24, 0.3);
+    box-shadow: 0 0 20px rgba(212, 164, 24, 0.1);
+  }
+  50% {
+    border-color: rgba(212, 164, 24, 0.6);
+    box-shadow: 0 0 30px rgba(212, 164, 24, 0.2);
+  }
+}
+
+.border-gold-pulse {
+  animation: gold-pulse 4s ease-in-out infinite;
+}
+
+/* ========================================
+   FLOATING DUST PARTICLES
+   ======================================== */
+
+@keyframes float-dust {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+.dust-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.dust-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: radial-gradient(circle, var(--color-gold-400) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float-dust 15s linear infinite;
+}
+
+/* ========================================
+   REVEAL ANIMATIONS
+   ======================================== */
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-reveal-up {
+  animation: reveal-up 0.6s ease-out forwards;
+}
+
+.animate-reveal-fade {
+  animation: reveal-fade 0.5s ease-out forwards;
+}
+
+.animate-reveal-scale {
+  animation: reveal-scale 0.5s ease-out forwards;
+}
+
+/* Staggered delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+
+/* ========================================
+   DECORATIVE ELEMENTS
+   ======================================== */
+
+/* Hieroglyphic-inspired divider */
+.divider-hieroglyph {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-gold-600);
+  opacity: 0.6;
+}
+
+.divider-hieroglyph::before,
+.divider-hieroglyph::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-gold-600) 20%,
+    var(--color-gold-600) 80%,
+    transparent
+  );
+}
+
+/* Archaeological frame border */
+.frame-archaeological {
+  position: relative;
+  border: 1px solid rgba(212, 164, 24, 0.2);
+}
+
+.frame-archaeological::before,
+.frame-archaeological::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-gold-500);
+}
+
+.frame-archaeological::before {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.frame-archaeological::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Carved text effect */
+.text-carved {
+  text-shadow:
+    1px 1px 2px rgba(0, 0, 0, 0.8),
+    -1px -1px 1px rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================
+   GLASS MORPHISM PANELS
+   ======================================== */
+
+.glass-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(20, 17, 26, 0.9) 0%,
+    rgba(35, 30, 46, 0.8) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 164, 24, 0.15);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-dark {
+  background: linear-gradient(
+    135deg,
+    rgba(13, 11, 9, 0.95) 0%,
+    rgba(26, 23, 20, 0.9) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 164, 24, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+/* Primary gold button */
+.btn-gold {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    var(--color-gold-500) 0%,
+    var(--color-gold-400) 50%,
+    var(--color-gold-500) 100%
+  );
+  color: var(--color-obsidian-950);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow:
+    0 4px 20px rgba(212, 164, 24, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-gold:hover::before {
+  left: 100%;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 30px rgba(212, 164, 24, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+/* Secondary ghost button */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-gold-400);
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.5rem;
+  border: 1px solid rgba(212, 164, 24, 0.3);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(212, 164, 24, 0.1);
+  border-color: var(--color-gold-500);
+  color: var(--color-gold-300);
+}
+
+/* ========================================
+   CARDS
+   ======================================== */
+
+.artifact-card {
+  position: relative;
+  background: linear-gradient(
+    145deg,
+    rgba(26, 23, 20, 0.9) 0%,
+    rgba(13, 11, 9, 0.95) 100%
+  );
+  border: 1px solid rgba(212, 164, 24, 0.1);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.artifact-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(212, 164, 24, 0.05) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.artifact-card:hover {
+  border-color: rgba(212, 164, 24, 0.3);
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(212, 164, 24, 0.1);
+}
+
+.artifact-card:hover::before {
+  opacity: 1;
+}
+
+/* ========================================
+   FORM INPUTS
+   ======================================== */
+
+.input-ancient {
+  background: rgba(26, 23, 20, 0.8);
+  border: 1px solid rgba(212, 164, 24, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: var(--color-obsidian-100);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-ancient::placeholder {
+  color: var(--color-obsidian-500);
+}
+
+.input-ancient:focus {
+  outline: none;
+  border-color: var(--color-gold-500);
+  box-shadow: 0 0 0 3px rgba(212, 164, 24, 0.1);
+}
+
+/* ========================================
+   PROGRESS INDICATORS
+   ======================================== */
+
 @keyframes shine {
   0% {
     transform: translateX(-100%);
@@ -152,7 +616,10 @@ body {
   animation: shine 1.5s ease-in-out infinite;
 }
 
-/* Slide up animation for install prompt */
+/* ========================================
+   SLIDE UP ANIMATION
+   ======================================== */
+
 @keyframes slide-up {
   0% {
     transform: translateY(100%);
@@ -166,4 +633,252 @@ body {
 
 .animate-slide-up {
   animation: slide-up 0.3s ease-out forwards;
+}
+
+/* ========================================
+   BACKGROUND EFFECTS
+   ======================================== */
+
+.bg-gradient-radial {
+  background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
+}
+
+/* Ambient tomb glow */
+.glow-ambient {
+  position: relative;
+}
+
+.glow-ambient::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(212, 164, 24, 0.08) 0%,
+    rgba(212, 164, 24, 0.02) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ========================================
+   FLOAT ANIMATION
+   ======================================== */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ========================================
+   STARS LAYER
+   ======================================== */
+
+.stars-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, rgba(212, 164, 24, 0.8), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(212, 164, 24, 0.5), transparent),
+    radial-gradient(2px 2px at 130px 80px, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 160px 120px, rgba(212, 164, 24, 0.6), transparent),
+    radial-gradient(2px 2px at 200px 50px, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 250px 160px, rgba(212, 164, 24, 0.4), transparent),
+    radial-gradient(2px 2px at 280px 90px, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 320px 200px, rgba(212, 164, 24, 0.5), transparent),
+    radial-gradient(2px 2px at 350px 140px, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 380px 60px, rgba(212, 164, 24, 0.7), transparent),
+    radial-gradient(2px 2px at 420px 180px, rgba(255, 255, 255, 0.4), transparent);
+  background-size: 450px 400px;
+  animation: twinkle 8s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   SPARKLE ANIMATION
+   ======================================== */
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* ========================================
+   NAVIGATION TAB UNDERLINE
+   ======================================== */
+
+.tab-underline {
+  position: relative;
+}
+
+.tab-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-gold-500),
+    transparent
+  );
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.tab-underline.active::after {
+  transform: scaleX(1);
+}
+
+/* ========================================
+   TOGGLE SWITCH
+   ======================================== */
+
+.toggle-ancient {
+  position: relative;
+  width: 3rem;
+  height: 1.75rem;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 23, 20, 0.9) 0%,
+    rgba(45, 40, 33, 0.9) 100%
+  );
+  border: 1px solid rgba(212, 164, 24, 0.2);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-ancient.active {
+  background: linear-gradient(
+    135deg,
+    var(--color-gold-600) 0%,
+    var(--color-gold-500) 100%
+  );
+  border-color: var(--color-gold-400);
+}
+
+.toggle-ancient .toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: linear-gradient(
+    135deg,
+    #fff 0%,
+    #e8e8e8 100%
+  );
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-ancient.active .toggle-knob {
+  transform: translateX(1.25rem);
+}
+
+/* ========================================
+   SELECT DROPDOWN
+   ======================================== */
+
+.select-ancient {
+  appearance: none;
+  background: rgba(26, 23, 20, 0.8);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23d4a418'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.25rem;
+  border: 1px solid rgba(212, 164, 24, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  color: var(--color-obsidian-100);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.select-ancient:focus {
+  outline: none;
+  border-color: var(--color-gold-500);
+  box-shadow: 0 0 0 3px rgba(212, 164, 24, 0.1);
+}
+
+.select-ancient option {
+  background: var(--color-obsidian-900);
+  color: var(--color-obsidian-100);
+}
+
+/* ========================================
+   LOADING SPINNER
+   ======================================== */
+
+@keyframes spin-gold {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner-gold {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 3px solid rgba(212, 164, 24, 0.2);
+  border-top-color: var(--color-gold-500);
+  border-radius: 50%;
+  animation: spin-gold 1s linear infinite;
+}
+
+/* ========================================
+   IMAGE HOVER ZOOM
+   ======================================== */
+
+.img-hover-zoom {
+  overflow: hidden;
+}
+
+.img-hover-zoom img {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.img-hover-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* ========================================
+   UTILITY: OPACITY CLASSES FOR REVEAL
+   ======================================== */
+
+.opacity-0-initial {
+  opacity: 0;
 }

@@ -26,10 +26,18 @@ export function Layout() {
   }, [setOnlineStatus]);
 
   return (
-    <div className="min-h-screen bg-ancient-900 text-ancient-50 flex flex-col">
+    <div className="min-h-screen bg-obsidian-950 text-obsidian-100 flex flex-col texture-stone">
+      {/* Global ambient background */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        {/* Top corner glow */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-radial from-gold-500/3 to-transparent" />
+        {/* Bottom corner glow */}
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-radial from-lapis-700/5 to-transparent" />
+      </div>
+
       <OfflineIndicator />
       <Header />
-      <main className="flex-1 pb-20">
+      <main className="relative z-10 flex-1 pb-24">
         <Outlet />
       </main>
       <BottomNav />

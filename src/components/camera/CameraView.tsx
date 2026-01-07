@@ -102,9 +102,9 @@ export function CameraView({ onCapture, onError }: CameraViewProps) {
   };
 
   return (
-    <div className="relative flex flex-col items-center">
-      {/* Video preview */}
-      <div className="relative w-full max-w-md aspect-[3/4] bg-ancient-950 rounded-2xl overflow-hidden">
+    <div className="relative flex flex-col items-center w-full max-w-md">
+      {/* Video preview container */}
+      <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden glass-panel-dark">
         <video
           ref={videoRef}
           autoPlay
@@ -113,51 +113,84 @@ export function CameraView({ onCapture, onError }: CameraViewProps) {
           className={`w-full h-full object-cover ${isMirrored ? 'scale-x-[-1]' : ''}`}
         />
 
+        {/* Loading state */}
         {!isReady && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-8 h-8 border-2 border-gold-400 border-t-transparent rounded-full animate-spin" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-obsidian-950">
+            <div className="spinner-gold mb-4" />
+            <p className="text-obsidian-400 text-sm font-display tracking-wider">
+              {t('capture.initializing') || 'Initializing camera...'}
+            </p>
           </div>
         )}
 
         {/* Viewfinder overlay */}
-        <div className="absolute inset-4 border-2 border-white/20 rounded-xl pointer-events-none" />
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Corner brackets */}
+          <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-gold-500/50" />
+          <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-gold-500/50" />
+          <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-gold-500/50" />
+          <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-gold-500/50" />
+
+          {/* Center crosshair */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12">
+            <div className="absolute top-1/2 left-0 right-0 h-px bg-gold-500/30" />
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gold-500/30" />
+          </div>
+
+          {/* Ambient gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/40 via-transparent to-transparent" />
+        </div>
       </div>
 
       {/* Hidden canvas for capture */}
       <canvas ref={canvasRef} className="hidden" />
 
       {/* Controls */}
-      <div className="flex items-center justify-center gap-6 mt-6">
+      <div className="flex items-center justify-center gap-8 mt-8">
         {/* Switch camera button */}
         <button
           onClick={handleSwitchCamera}
-          className="w-12 h-12 rounded-full bg-ancient-800 border border-ancient-700 flex items-center justify-center text-ancient-300 hover:bg-ancient-700 transition-colors"
+          className="w-14 h-14 rounded-full glass-panel flex items-center justify-center text-obsidian-300 hover:text-gold-400 hover:border-gold-500/30 transition-all group"
           aria-label={t('capture.switchCamera')}
         >
-          <SwitchCameraIcon className="w-5 h-5" />
+          <SwitchCameraIcon className="w-6 h-6 group-hover:rotate-180 transition-transform duration-500" />
         </button>
 
         {/* Capture button */}
         <button
           onClick={handleCapture}
           disabled={!isReady}
-          className="w-16 h-16 rounded-full bg-white border-4 border-ancient-700 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 transition-transform"
+          className="relative w-20 h-20 rounded-full disabled:opacity-50 disabled:cursor-not-allowed group"
           aria-label={t('capture.takePhoto')}
         >
-          <div className="w-12 h-12 rounded-full bg-white" />
+          {/* Outer ring */}
+          <div className="absolute inset-0 rounded-full border-4 border-gold-500/60 group-hover:border-gold-400 transition-colors" />
+          {/* Inner button */}
+          <div className="absolute inset-2 rounded-full bg-gradient-to-br from-gold-400 to-gold-500 group-hover:from-gold-300 group-hover:to-gold-400 group-active:scale-90 transition-all shadow-lg shadow-gold-500/30" />
+          {/* Shine effect */}
+          <div className="absolute inset-2 rounded-full bg-gradient-to-br from-white/30 via-transparent to-transparent" />
         </button>
 
         {/* Placeholder for symmetry */}
-        <div className="w-12 h-12" />
+        <div className="w-14 h-14" />
       </div>
+
+      {/* Tip */}
+      <p className="mt-6 text-xs text-obsidian-500 text-center font-display tracking-wider">
+        {t('capture.tip') || 'Position artifact in center for best results'}
+      </p>
     </div>
   );
 }
 
 function SwitchCameraIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+      />
     </svg>
   );
 }
