@@ -595,11 +595,12 @@ interface ColorVariantGalleryProps {
 - [x] Create SettingsPage with language toggle, color scheme, restoration, haptics
 - [x] Create placeholder pages for Capture, Gallery, ArtifactDetail
 
-### Phase 4: Camera & Upload
-- [ ] Build CameraView with stream display
-- [ ] Implement CaptureSession (single image mode)
-- [ ] Build FileUpload with drag-and-drop
-- [ ] Wire up CapturePage
+### Phase 4: Camera & Upload ✅
+- [x] Build CameraView with stream display, camera switching, capture
+- [x] Implement CaptureSession (orchestrates camera/upload flow)
+- [x] Build FileUpload with drag-and-drop
+- [x] Create image utilities (resize, thumbnail, dimensions)
+- [x] Wire up CapturePage - saves to Dexie and navigates to artifact
 
 ### Phase 5: Gallery
 - [ ] Build ArtifactCard component
@@ -749,3 +750,10 @@ GOOGLE_AI_API_KEY=your_gemini_api_key
 - SettingsPage with language toggle, default scheme selector, toggles
 - Placeholder pages for Capture, Gallery, ArtifactDetail
 - Safe area CSS utility for mobile bottom inset
+
+### 2026-01-07: Phase 4 Complete
+- CameraView with getUserMedia, front/back camera switching, capture to canvas
+- FileUpload with drag-and-drop and click-to-select
+- CaptureSession orchestrates camera/upload flow with preview and retake
+- Image utilities: resize, thumbnail creation, dimension extraction
+- Captures saved to Dexie (artifacts + images tables) with auto-navigation
