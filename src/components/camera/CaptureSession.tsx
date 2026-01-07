@@ -7,6 +7,7 @@ import { FileUpload } from './FileUpload';
 import { useCaptureStore } from '@/stores/appStore';
 import { db } from '@/lib/db';
 import { resizeImage, createThumbnail } from '@/lib/utils/image';
+import { identifyArtifact, blobToBase64 } from '@/lib/api/client';
 import type { Artifact, ArtifactImage } from '@/types/artifact';
 
 type CaptureMode = 'camera' | 'upload';
@@ -58,6 +59,19 @@ export function CaptureSession() {
       const resizedBlob = await resizeImage(capturedImage.blob, 1920);
       const thumbnailBlob = await createThumbnail(capturedImage.blob, 256);
 
+      // Try to identify the artifact using AI
+      let artifactName: string | undefined;
+      try {
+        const imageBase64 = await blobToBase64(resizedBlob);
+        const identifyResult = await identifyArtifact(imageBase64);
+        if (identifyResult.success && identifyResult.name) {
+          artifactName = identifyResult.name;
+        }
+      } catch (identifyErr) {
+        // Identification failed, continue without name
+        console.warn('Artifact identification failed:', identifyErr);
+      }
+
       // Create artifact and image records
       const artifactId = uuidv4();
       const imageId = uuidv4();
@@ -70,7 +84,9 @@ export function CaptureSession() {
         status: 'images-captured',
         imageIds: [imageId],
         colorVariantIds: [],
-        metadata: {},
+        metadata: {
+          name: artifactName,
+        },
         thumbnailBlob,
       };
 

@@ -34,6 +34,29 @@ export async function colorizeImage(request: ColorizeRequest): Promise<ColorizeR
   return response.json();
 }
 
+export interface IdentifyResponse {
+  success: boolean;
+  name?: string;
+  error?: string;
+}
+
+export async function identifyArtifact(imageBase64: string): Promise<IdentifyResponse> {
+  const response = await fetch(`${API_BASE}/identify`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ imageBase64 }),
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(error || 'Identification request failed');
+  }
+
+  return response.json();
+}
+
 // Utility to convert Blob to base64
 export async function blobToBase64(blob: Blob): Promise<string> {
   return new Promise((resolve, reject) => {

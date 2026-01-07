@@ -81,3 +81,15 @@ export function useDeleteArtifact() {
     await db.artifacts.delete(artifactId);
   };
 }
+
+/**
+ * Hook to update artifact name
+ */
+export function useUpdateArtifactName() {
+  return async (artifactId: string, name: string) => {
+    await db.artifacts.where('id').equals(artifactId).modify((artifact) => {
+      artifact.metadata.name = name || undefined;
+      artifact.updatedAt = new Date();
+    });
+  };
+}

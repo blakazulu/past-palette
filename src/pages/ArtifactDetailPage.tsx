@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useArtifactData, useDeleteVariant, useDeleteArtifact } from '@/hooks/useArtifactData';
+import { useArtifactData, useDeleteVariant, useDeleteArtifact, useUpdateArtifactName } from '@/hooks/useArtifactData';
 import { ArtifactHeader, ColorsTab, OriginalTab } from '@/components/artifact';
 
 type TabId = 'colors' | 'original';
@@ -15,6 +15,7 @@ export function ArtifactDetailPage() {
   const { artifact, variants, primaryImage, isLoading } = useArtifactData(id);
   const deleteVariant = useDeleteVariant();
   const deleteArtifact = useDeleteArtifact();
+  const updateArtifactName = useUpdateArtifactName();
 
   const handleDeleteVariant = async (variantId: string) => {
     if (!id) return;
@@ -27,6 +28,11 @@ export function ArtifactDetailPage() {
       await deleteArtifact(id);
       navigate('/gallery');
     }
+  };
+
+  const handleNameChange = async (name: string) => {
+    if (!id) return;
+    await updateArtifactName(id, name);
   };
 
   // Loading state
@@ -75,7 +81,7 @@ export function ArtifactDetailPage() {
     <div className="px-4 py-6 sm:px-6">
       {/* Header */}
       <div className="opacity-0-initial animate-reveal-up">
-        <ArtifactHeader artifact={artifact} onDelete={handleDeleteArtifact} />
+        <ArtifactHeader artifact={artifact} onDelete={handleDeleteArtifact} onNameChange={handleNameChange} />
       </div>
 
       {/* Tabs */}
