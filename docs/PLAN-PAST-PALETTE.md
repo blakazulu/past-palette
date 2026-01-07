@@ -579,14 +579,14 @@ interface ColorVariantGalleryProps {
 - [x] Set up custom dark theme colors (ancient, gold, egyptian, accent, terra)
 - [x] ESLint 9 with flat config
 
-### Phase 2: Core Infrastructure
-- [ ] Set up i18next with en/he locales (PRIORITY - all UI text uses translations)
-- [ ] Configure RTL support for Hebrew
-- [ ] Implement Dexie database schema
-- [ ] Create Zustand stores (app, settings, capture)
-- [ ] Set up TanStack Query provider
-- [ ] Create API client wrapper
-- [ ] Build utility functions
+### Phase 2: Core Infrastructure ✅
+- [x] Set up i18next with en/he locales (PRIORITY - all UI text uses translations)
+- [x] Configure RTL support for Hebrew (auto-switches dir on language change)
+- [x] Implement Dexie database schema (artifacts, images, colorVariants tables)
+- [x] Create Zustand stores (app, settings with persist, capture)
+- [x] Set up TanStack Query provider
+- [x] Create API client wrapper (colorize endpoint + base64 utils)
+- [x] Create TypeScript types (artifact.ts)
 
 ### Phase 3: Layout & Navigation
 - [ ] Create Layout component with Header and BottomNav
@@ -729,3 +729,14 @@ GOOGLE_AI_API_KEY=your_gemini_api_key
 - Netlify config with SPA routing, security headers, and API function redirects
 - ESLint 9 with flat config, TypeScript, React hooks plugins
 - Build verified successful
+
+### 2026-01-07: Phase 2 Complete
+- i18next configured with en/he locales and browser language detection
+- RTL support: document dir auto-switches on language change
+- Comprehensive translation files for all planned UI text
+- Dexie database with artifacts, images, colorVariants tables
+- Zustand stores: appStore (processing status), settingsStore (persisted), captureStore
+- TanStack Query provider with sensible defaults
+- API client with colorize endpoint wrapper and base64 utilities
+- TypeScript types for all domain entities
+- App.tsx updated with language toggle demo

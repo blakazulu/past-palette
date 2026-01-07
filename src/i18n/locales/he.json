@@ -1,0 +1,119 @@
+{
+  "app": {
+    "name": "פלטת העבר",
+    "tagline": "צבע את העולם העתיק"
+  },
+  "nav": {
+    "home": "בית",
+    "capture": "צילום",
+    "gallery": "גלריה",
+    "settings": "הגדרות"
+  },
+  "home": {
+    "title": "הפיחו חיים בהיסטוריה",
+    "subtitle": "צביעה מבוססת בינה מלאכותית לממצאים ארכיאולוגיים",
+    "getStarted": "התחילו",
+    "viewGallery": "צפו בגלריה"
+  },
+  "capture": {
+    "title": "צילום ממצא",
+    "takePhoto": "צלמו תמונה",
+    "uploadImage": "העלאת תמונה",
+    "dragDrop": "גררו תמונה לכאן",
+    "or": "או",
+    "selectFile": "בחרו קובץ",
+    "switchCamera": "החלפת מצלמה",
+    "retake": "צלמו שוב",
+    "usePhoto": "השתמשו בתמונה"
+  },
+  "colorization": {
+    "title": "בחרו סכמת צבעים",
+    "colorize": "צבעו",
+    "processing": "מעבד...",
+    "preparing": "מכין תמונה...",
+    "colorizing": "מחיל צבעים...",
+    "saving": "שומר תוצאה...",
+    "complete": "הושלם!",
+    "error": "אירעה שגיאה",
+    "retry": "נסו שוב",
+    "addVariant": "הוסיפו גרסה נוספת",
+    "includeRestoration": "כללו שחזור",
+    "restorationHint": "תקנו גם סדקים ונזקים",
+    "customPrompt": "הוראות מותאמות אישית",
+    "customPromptPlaceholder": "תארו את הצבעים שאתם רוצים..."
+  },
+  "schemes": {
+    "roman": "רומי",
+    "romanDesc": "צבעי האימפריה הרומית",
+    "greek": "יווני",
+    "greekDesc": "סגנון קדרות יוונית קלאסית",
+    "egyptian": "מצרי",
+    "egyptianDesc": "צבעים קדושים מצריים",
+    "mesopotamian": "מסופוטמי",
+    "mesopotamianDesc": "צבעים בבליים ואשוריים",
+    "weathered": "בלוי",
+    "weatheredDesc": "מראה מיושן עם פטינה",
+    "original": "מקורי",
+    "originalDesc": "צבעים מקוריים שזוהו ע\"י AI",
+    "custom": "מותאם אישית",
+    "customDesc": "הוראות צביעה משלכם"
+  },
+  "gallery": {
+    "title": "הממצאים שלי",
+    "empty": "אין ממצאים עדיין",
+    "emptyHint": "צלמו את הממצא הראשון שלכם כדי להתחיל",
+    "search": "חיפוש ממצאים...",
+    "filter": "סינון",
+    "sort": "מיון",
+    "sortNewest": "החדשים תחילה",
+    "sortOldest": "הישנים תחילה",
+    "sortName": "לפי שם",
+    "delete": "מחיקה",
+    "deleteConfirm": "למחוק ממצא זה?",
+    "deleteWarning": "לא ניתן לבטל פעולה זו."
+  },
+  "artifact": {
+    "colors": "צבעים",
+    "original": "מקור",
+    "variants": "גרסאות צבע",
+    "noVariants": "אין עדיין גרסאות צבע",
+    "noVariantsHint": "בחרו סכמת צבעים ליצירת הגרסה הראשונה",
+    "speculativeNote": "צביעת AI היא ספקולטיבית ומבוססת על מחקר היסטורי",
+    "download": "הורדה",
+    "share": "שיתוף",
+    "compare": "השוואה",
+    "before": "לפני",
+    "after": "אחרי"
+  },
+  "settings": {
+    "title": "הגדרות",
+    "language": "שפה",
+    "defaultScheme": "סכמת צבעים ברירת מחדל",
+    "restoration": "כללו שחזור כברירת מחדל",
+    "restorationDesc": "תיקון אוטומטי של סדקים ונזקים",
+    "haptics": "משוב רטט",
+    "hapticsDesc": "רטט בתגובה לפעולות",
+    "about": "אודות",
+    "version": "גרסה"
+  },
+  "common": {
+    "loading": "טוען...",
+    "error": "משהו השתבש",
+    "tryAgain": "נסו שוב",
+    "cancel": "ביטול",
+    "save": "שמירה",
+    "done": "סיום",
+    "close": "סגירה",
+    "yes": "כן",
+    "no": "לא",
+    "ok": "אישור"
+  },
+  "errors": {
+    "cameraAccess": "לא ניתן לגשת למצלמה",
+    "cameraPermission": "הרשאת מצלמה נדחתה",
+    "uploadFailed": "העלאת התמונה נכשלה",
+    "colorizationFailed": "הצביעה נכשלה",
+    "networkError": "שגיאת רשת. בדקו את החיבור.",
+    "unknownError": "אירעה שגיאה בלתי צפויה"
+  }
+}

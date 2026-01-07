@@ -1,0 +1,119 @@
+{
+  "app": {
+    "name": "Past Palette",
+    "tagline": "Color the Ancient World"
+  },
+  "nav": {
+    "home": "Home",
+    "capture": "Capture",
+    "gallery": "Gallery",
+    "settings": "Settings"
+  },
+  "home": {
+    "title": "Bring History to Life",
+    "subtitle": "AI-powered colorization for archaeological artifacts",
+    "getStarted": "Get Started",
+    "viewGallery": "View Gallery"
+  },
+  "capture": {
+    "title": "Capture Artifact",
+    "takePhoto": "Take Photo",
+    "uploadImage": "Upload Image",
+    "dragDrop": "Drag and drop an image here",
+    "or": "or",
+    "selectFile": "Select File",
+    "switchCamera": "Switch Camera",
+    "retake": "Retake",
+    "usePhoto": "Use Photo"
+  },
+  "colorization": {
+    "title": "Choose Color Scheme",
+    "colorize": "Colorize",
+    "processing": "Processing...",
+    "preparing": "Preparing image...",
+    "colorizing": "Applying colors...",
+    "saving": "Saving result...",
+    "complete": "Complete!",
+    "error": "Error occurred",
+    "retry": "Retry",
+    "addVariant": "Add Another Variant",
+    "includeRestoration": "Include Restoration",
+    "restorationHint": "Also repair cracks and damage",
+    "customPrompt": "Custom Instructions",
+    "customPromptPlaceholder": "Describe the colors you want..."
+  },
+  "schemes": {
+    "roman": "Roman",
+    "romanDesc": "Ancient Roman empire colors",
+    "greek": "Greek",
+    "greekDesc": "Classical Greek pottery style",
+    "egyptian": "Egyptian",
+    "egyptianDesc": "Ancient Egyptian sacred colors",
+    "mesopotamian": "Mesopotamian",
+    "mesopotamianDesc": "Babylonian and Assyrian colors",
+    "weathered": "Weathered",
+    "weatheredDesc": "Aged with natural patina",
+    "original": "Original",
+    "originalDesc": "AI-detected original colors",
+    "custom": "Custom",
+    "customDesc": "Your own color instructions"
+  },
+  "gallery": {
+    "title": "My Artifacts",
+    "empty": "No artifacts yet",
+    "emptyHint": "Capture your first artifact to get started",
+    "search": "Search artifacts...",
+    "filter": "Filter",
+    "sort": "Sort",
+    "sortNewest": "Newest first",
+    "sortOldest": "Oldest first",
+    "sortName": "By name",
+    "delete": "Delete",
+    "deleteConfirm": "Delete this artifact?",
+    "deleteWarning": "This action cannot be undone."
+  },
+  "artifact": {
+    "colors": "Colors",
+    "original": "Original",
+    "variants": "Color Variants",
+    "noVariants": "No color variants yet",
+    "noVariantsHint": "Choose a color scheme to create your first variant",
+    "speculativeNote": "AI colorization is speculative and based on historical research",
+    "download": "Download",
+    "share": "Share",
+    "compare": "Compare",
+    "before": "Before",
+    "after": "After"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "defaultScheme": "Default Color Scheme",
+    "restoration": "Include Restoration by Default",
+    "restorationDesc": "Automatically repair cracks and damage",
+    "haptics": "Haptic Feedback",
+    "hapticsDesc": "Vibration feedback on actions",
+    "about": "About",
+    "version": "Version"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "tryAgain": "Try Again",
+    "cancel": "Cancel",
+    "save": "Save",
+    "done": "Done",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK"
+  },
+  "errors": {
+    "cameraAccess": "Unable to access camera",
+    "cameraPermission": "Camera permission denied",
+    "uploadFailed": "Failed to upload image",
+    "colorizationFailed": "Colorization failed",
+    "networkError": "Network error. Please check your connection.",
+    "unknownError": "An unexpected error occurred"
+  }
+}
