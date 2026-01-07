@@ -102,9 +102,9 @@ export function OriginalTab({ image, metadata, artifactName }: OriginalTabProps)
             <div className="pt-3 border-t border-obsidian-700/50">
               <p className="text-sm text-obsidian-500 mb-2 font-display tracking-wider uppercase">{t('artifact.tags') || 'Tags'}</p>
               <div className="flex flex-wrap gap-2">
-                {metadata.tags.map((tag, index) => (
+                {metadata.tags.map((tag) => (
                   <span
-                    key={index}
+                    key={tag}
                     className="px-3 py-1.5 text-sm rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-400 font-display tracking-wider"
                   >
                     {tag}

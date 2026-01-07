@@ -85,7 +85,9 @@
     "sortName": "By name",
     "delete": "Delete",
     "deleteConfirm": "Delete this artifact?",
-    "deleteWarning": "This action cannot be undone."
+    "deleteWarning": "This action cannot be undone.",
+    "itemCount_one": "item",
+    "itemCount_other": "items"
   },
   "artifact": {
     "colors": "Colors",
@@ -100,7 +102,14 @@
     "download": "Download",
     "share": "Share",
     "before": "Before",
-    "after": "After"
+    "after": "After",
+    "status": {
+      "draft": "Draft",
+      "ready": "Ready",
+      "processing": "Processing",
+      "complete": "Complete",
+      "error": "Error"
+    }
   },
   "settings": {
     "title": "Settings",
@@ -140,5 +149,10 @@
     "notNow": "Not now",
     "offline": "You are offline",
     "backOnline": "Back online"
+  },
+  "errorBoundary": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Please try refreshing the page.",
+    "refresh": "Refresh Page"
   }
 }

@@ -53,7 +53,7 @@ export function GalleryToolbar({
             {resultCount}
           </span>
           <span className="text-sm text-obsidian-500 font-display tracking-wider uppercase">
-            {resultCount === 1 ? 'item' : 'items'}
+            {t('gallery.itemCount', { count: resultCount })}
           </span>
         </div>
       </div>

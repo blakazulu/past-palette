@@ -19,6 +19,7 @@ export function BeforeAfterSlider({
   const [isDragging, setIsDragging] = useState(false);
   const [beforeUrl, setBeforeUrl] = useState<string | null>(null);
   const [afterUrl, setAfterUrl] = useState<string | null>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Create object URLs for images
@@ -32,6 +33,18 @@ export function BeforeAfterSlider({
       URL.revokeObjectURL(aUrl);
     };
   }, [beforeImage, afterImage]);
+
+  // Track container width
+  useEffect(() => {
+    const updateWidth = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.offsetWidth);
+      }
+    };
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
 
   const updatePosition = useCallback((clientX: number) => {
     if (!containerRef.current) return;
@@ -110,7 +123,7 @@ export function BeforeAfterSlider({
           src={beforeUrl}
           alt={beforeLabel || t('artifact.before')}
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ width: `${containerRef.current?.offsetWidth || 0}px` }}
+          style={{ width: `${containerWidth}px` }}
           draggable={false}
         />
       </div>

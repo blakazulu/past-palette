@@ -85,7 +85,9 @@
     "sortName": "לפי שם",
     "delete": "מחיקה",
     "deleteConfirm": "למחוק ממצא זה?",
-    "deleteWarning": "לא ניתן לבטל פעולה זו."
+    "deleteWarning": "לא ניתן לבטל פעולה זו.",
+    "itemCount_one": "פריט",
+    "itemCount_other": "פריטים"
   },
   "artifact": {
     "colors": "צבעים",
@@ -100,7 +102,14 @@
     "download": "הורדה",
     "share": "שיתוף",
     "before": "לפני",
-    "after": "אחרי"
+    "after": "אחרי",
+    "status": {
+      "draft": "טיוטה",
+      "ready": "מוכן",
+      "processing": "מעבד",
+      "complete": "הושלם",
+      "error": "שגיאה"
+    }
   },
   "settings": {
     "title": "הגדרות",
@@ -140,5 +149,10 @@
     "notNow": "לא עכשיו",
     "offline": "אתם במצב לא מקוון",
     "backOnline": "חזרתם לרשת"
+  },
+  "errorBoundary": {
+    "title": "משהו השתבש",
+    "description": "אירעה שגיאה בלתי צפויה. אנא נסו לרענן את הדף.",
+    "refresh": "רענן דף"
   }
 }

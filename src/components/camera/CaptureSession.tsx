@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
@@ -18,6 +18,18 @@ export function CaptureSession() {
   const [mode, setMode] = useState<CaptureMode>('camera');
   const [error, setError] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+  // Create/cleanup object URL for preview
+  useEffect(() => {
+    if (!capturedImage) {
+      setPreviewUrl(null);
+      return;
+    }
+    const url = URL.createObjectURL(capturedImage.blob);
+    setPreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [capturedImage]);
 
   const handleCapture = async (blob: Blob, width: number, height: number) => {
     setCapturedImage({ blob, width, height, timestamp: new Date() });
@@ -104,11 +116,13 @@ export function CaptureSession() {
 
         {/* Preview with archaeological frame */}
         <div className="relative w-full max-w-md frame-archaeological rounded-xl overflow-hidden mb-8">
-          <img
-            src={URL.createObjectURL(capturedImage.blob)}
-            alt="Captured"
-            className="w-full aspect-[3/4] object-cover"
-          />
+          {previewUrl && (
+            <img
+              src={previewUrl}
+              alt="Captured"
+              className="w-full aspect-[3/4] object-cover"
+            />
+          )}
           {/* Subtle overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/30 to-transparent pointer-events-none" />
         </div>

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import type { Artifact } from '@/types/artifact';
@@ -10,21 +10,25 @@ interface ArtifactCardProps {
 
 export function ArtifactCard({ artifact, index = 0 }: ArtifactCardProps) {
   const { t } = useTranslation();
+  const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null);
 
-  const thumbnailUrl = useMemo(() => {
-    if (artifact.thumbnailBlob) {
-      return URL.createObjectURL(artifact.thumbnailBlob);
+  useEffect(() => {
+    if (!artifact.thumbnailBlob) {
+      setThumbnailUrl(null);
+      return;
     }
-    return null;
+    const url = URL.createObjectURL(artifact.thumbnailBlob);
+    setThumbnailUrl(url);
+    return () => URL.revokeObjectURL(url);
   }, [artifact.thumbnailBlob]);
 
   const statusConfig = {
-    draft: { color: 'bg-obsidian-500', label: 'Draft' },
-    'images-captured': { color: 'bg-lapis-500', label: 'Ready' },
-    colorizing: { color: 'bg-gold-500 animate-pulse', label: 'Processing' },
-    complete: { color: 'bg-green-500', label: 'Complete' },
-    error: { color: 'bg-red-500', label: 'Error' },
-  }[artifact.status] || { color: 'bg-obsidian-500', label: '' };
+    draft: { color: 'bg-obsidian-500', labelKey: 'artifact.status.draft' },
+    'images-captured': { color: 'bg-lapis-500', labelKey: 'artifact.status.ready' },
+    colorizing: { color: 'bg-gold-500 animate-pulse', labelKey: 'artifact.status.processing' },
+    complete: { color: 'bg-green-500', labelKey: 'artifact.status.complete' },
+    error: { color: 'bg-red-500', labelKey: 'artifact.status.error' },
+  }[artifact.status] || { color: 'bg-obsidian-500', labelKey: '' };
 
   const variantCount = artifact.colorVariantIds.length;
 
@@ -57,7 +61,7 @@ export function ArtifactCard({ artifact, index = 0 }: ArtifactCardProps) {
           <div className="flex items-center gap-2">
             <div className={`w-2 h-2 rounded-full ${statusConfig.color}`} />
             <span className="text-sm text-obsidian-300 font-display tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity">
-              {statusConfig.label}
+              {statusConfig.labelKey && t(statusConfig.labelKey)}
             </span>
           </div>
 

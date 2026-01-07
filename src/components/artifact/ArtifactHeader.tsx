@@ -18,12 +18,12 @@ export function ArtifactHeader({ artifact, onDelete }: ArtifactHeaderProps) {
   };
 
   const statusConfig = {
-    draft: { color: 'bg-obsidian-500', label: 'Draft' },
-    'images-captured': { color: 'bg-lapis-500', label: 'Ready' },
-    colorizing: { color: 'bg-gold-500 animate-pulse', label: 'Processing' },
-    complete: { color: 'bg-green-500', label: 'Complete' },
-    error: { color: 'bg-red-500', label: 'Error' },
-  }[artifact.status] || { color: 'bg-obsidian-500', label: '' };
+    draft: { color: 'bg-obsidian-500', labelKey: 'artifact.status.draft' },
+    'images-captured': { color: 'bg-lapis-500', labelKey: 'artifact.status.ready' },
+    colorizing: { color: 'bg-gold-500 animate-pulse', labelKey: 'artifact.status.processing' },
+    complete: { color: 'bg-green-500', labelKey: 'artifact.status.complete' },
+    error: { color: 'bg-red-500', labelKey: 'artifact.status.error' },
+  }[artifact.status] || { color: 'bg-obsidian-500', labelKey: '' };
 
   return (
     <div className="flex items-start justify-between gap-4 mb-6">
@@ -44,7 +44,7 @@ export function ArtifactHeader({ artifact, onDelete }: ArtifactHeaderProps) {
             <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-obsidian-800/80">
               <div className={`w-2 h-2 rounded-full ${statusConfig.color}`} />
               <span className="text-sm text-obsidian-400 font-display tracking-wider uppercase">
-                {statusConfig.label}
+                {statusConfig.labelKey && t(statusConfig.labelKey)}
               </span>
             </div>
           </div>
