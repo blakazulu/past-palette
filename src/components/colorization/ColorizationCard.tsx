@@ -42,12 +42,13 @@ export function ColorizationCard({
   };
 
   return (
-    <div className="bg-ancient-900/50 border border-ancient-700 rounded-2xl p-5 space-y-5">
-      <h2 className="text-lg font-semibold text-ancient-100">
+    <div className="glass-panel rounded-2xl p-4 sm:p-6 space-y-5">
+      {/* Title */}
+      <h2 className="text-lg sm:text-xl font-display uppercase tracking-wider text-gold-400">
         {t('colorization.title')}
       </h2>
 
-      {/* Color scheme selector */}
+      {/* Color scheme selector - now a beautiful 6-item grid */}
       <ColorSchemeSelector
         selected={selectedScheme}
         onSelect={setSelectedScheme}
@@ -56,8 +57,8 @@ export function ColorizationCard({
 
       {/* Custom prompt input */}
       {selectedScheme === 'custom' && (
-        <div className="space-y-2">
-          <label className="block text-sm font-medium text-ancient-300">
+        <div className="space-y-2 animate-reveal-up">
+          <label className="block text-sm font-medium text-gold-400/80 font-display uppercase tracking-wider">
             {t('colorization.customPromptLabel')}
           </label>
           <textarea
@@ -66,18 +67,18 @@ export function ColorizationCard({
             placeholder={t('colorization.customPromptPlaceholder')}
             disabled={isProcessing || disabled}
             rows={3}
-            className="w-full px-4 py-3 rounded-lg bg-ancient-800 border border-ancient-700 text-ancient-100 placeholder:text-ancient-500 focus:outline-none focus:ring-2 focus:ring-gold-500/50 resize-none disabled:opacity-50"
+            className="w-full px-4 py-3 rounded-xl bg-obsidian-900/60 border border-gold-500/20 text-obsidian-100 placeholder:text-obsidian-500 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500/50 resize-none disabled:opacity-50 transition-all"
           />
         </div>
       )}
 
       {/* Restoration toggle */}
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm font-medium text-ancient-200">
+      <div className="flex items-center justify-between p-3 sm:p-4 rounded-xl bg-obsidian-900/40 border border-gold-500/10">
+        <div className="flex-1 mr-4">
+          <p className="text-sm sm:text-base font-medium text-obsidian-100">
             {t('colorization.includeRestoration')}
           </p>
-          <p className="text-xs text-ancient-500">
+          <p className="text-xs sm:text-sm text-obsidian-400 mt-0.5">
             {t('colorization.restorationHint')}
           </p>
         </div>
@@ -88,17 +89,12 @@ export function ColorizationCard({
           disabled={isProcessing || disabled}
           onClick={() => setIncludeRestoration(!includeRestoration)}
           className={`
-            relative w-11 h-6 rounded-full transition-colors
-            ${includeRestoration ? 'bg-gold-500' : 'bg-ancient-600'}
-            ${isProcessing || disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+            toggle-ancient flex-shrink-0
+            ${includeRestoration ? 'active' : ''}
+            ${isProcessing || disabled ? 'opacity-50 cursor-not-allowed' : ''}
           `}
         >
-          <span
-            className={`
-              absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform
-              ${includeRestoration ? 'translate-x-5' : 'translate-x-0'}
-            `}
-          />
+          <span className="toggle-knob" />
         </button>
       </div>
 
@@ -121,11 +117,11 @@ export function ColorizationCard({
           (selectedScheme === 'custom' && !customPrompt.trim())
         }
         className={`
-          w-full py-3 rounded-xl font-semibold transition-all
+          w-full py-3.5 sm:py-4 rounded-xl font-display uppercase tracking-wider text-sm sm:text-base font-semibold transition-all
           ${
-            isProcessing || disabled
-              ? 'bg-ancient-700 text-ancient-400 cursor-not-allowed'
-              : 'bg-gold-500 text-ancient-900 hover:bg-gold-400 active:scale-[0.98]'
+            isProcessing || disabled || (selectedScheme === 'custom' && !customPrompt.trim())
+              ? 'bg-obsidian-800 text-obsidian-500 cursor-not-allowed border border-obsidian-700'
+              : 'btn-gold'
           }
         `}
       >
@@ -142,7 +138,7 @@ export function ColorizationCard({
       </button>
 
       {/* Speculative notice */}
-      <p className="text-xs text-ancient-500 text-center">
+      <p className="text-xs text-obsidian-400 text-center leading-relaxed">
         {t('colorization.speculativeNotice')}
       </p>
     </div>

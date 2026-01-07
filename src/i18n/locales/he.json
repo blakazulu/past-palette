@@ -1,7 +1,7 @@
 {
   "app": {
     "name": "פלטת העבר",
-    "tagline": "צבע את העולם העתיק"
+    "tagline": "צבעו את העולם העתיק"
   },
   "nav": {
     "home": "בית",
@@ -11,9 +11,9 @@
   },
   "home": {
     "title": "הפיחו חיים בהיסטוריה",
-    "subtitle": "צביעה מבוססת בינה מלאכותית לממצאים ארכיאולוגיים",
-    "getStarted": "התחילו",
-    "viewGallery": "צפו בגלריה"
+    "subtitle": "צביעה בבינה מלאכותית לממצאים ארכיאולוגיים בפלטות צבעים היסטוריות מדויקות",
+    "getStarted": "התחילו עכשיו",
+    "viewGallery": "לגלריה"
   },
   "capture": {
     "title": "צילום ממצא",
@@ -28,8 +28,8 @@
   },
   "colorization": {
     "title": "צביעת ממצא",
-    "selectScheme": "בחרו סכמת צבעים",
-    "colorize": "צבעו",
+    "selectScheme": "בחרו פלטת צבעים",
+    "colorize": "צור",
     "colorizeAnother": "צרו גרסה נוספת",
     "processing": "מעבד...",
     "statusPreparing": "מכין תמונה...",
@@ -42,38 +42,34 @@
     "includeRestoration": "כללו שחזור",
     "restorationHint": "תקנו גם סדקים ונזקים",
     "customPromptLabel": "הוראות מותאמות אישית",
-    "customPromptPlaceholder": "תארו את הצבעים שאתם רוצים להחיל...",
+    "customPromptPlaceholder": "תארו את הצבעים שתרצו להחיל...",
     "speculativeNotice": "צביעת AI היא ספקולטיבית ומבוססת על מחקר היסטורי"
   },
   "colorSchemes": {
+    "mesopotamian": "מסופוטמי",
+    "mesopotamianDesc": "צבעים קדושים בבליים ואשוריים",
+    "egyptian": "מצרי",
+    "egyptianDesc": "לאפיס וזהב מצריים עתיקים",
     "roman": "רומי",
     "romanDesc": "צבעי האימפריה הרומית",
     "greek": "יווני",
-    "greekDesc": "סגנון קדרות יוונית קלאסית",
-    "egyptian": "מצרי",
-    "egyptianDesc": "צבעים קדושים מצריים",
-    "mesopotamian": "מסופוטמי",
-    "mesopotamianDesc": "צבעים בבליים ואשוריים",
-    "weathered": "בלוי",
-    "weatheredDesc": "מראה מיושן עם פטינה",
-    "original": "מקורי",
-    "originalDesc": "צבעים מקוריים שזוהו ע\"י AI",
+    "greekDesc": "פלטת קדרות יוונית קלאסית",
+    "original": "זיהוי AI",
+    "originalDesc": "תנו ל-AI לזהות צבעים אותנטיים",
     "custom": "מותאם אישית",
     "customDesc": "הוראות צביעה משלכם"
   },
   "schemes": {
+    "mesopotamian": "מסופוטמי",
+    "mesopotamianDesc": "צבעים קדושים בבליים ואשוריים",
+    "egyptian": "מצרי",
+    "egyptianDesc": "לאפיס וזהב מצריים עתיקים",
     "roman": "רומי",
     "romanDesc": "צבעי האימפריה הרומית",
     "greek": "יווני",
-    "greekDesc": "סגנון קדרות יוונית קלאסית",
-    "egyptian": "מצרי",
-    "egyptianDesc": "צבעים קדושים מצריים",
-    "mesopotamian": "מסופוטמי",
-    "mesopotamianDesc": "צבעים בבליים ואשוריים",
-    "weathered": "בלוי",
-    "weatheredDesc": "מראה מיושן עם פטינה",
-    "original": "מקורי",
-    "originalDesc": "צבעים מקוריים שזוהו ע\"י AI",
+    "greekDesc": "פלטת קדרות יוונית קלאסית",
+    "original": "זיהוי AI",
+    "originalDesc": "תנו ל-AI לזהות צבעים אותנטיים",
     "custom": "מותאם אישית",
     "customDesc": "הוראות צביעה משלכם"
   },
@@ -99,7 +95,7 @@
     "untitled": "ממצא ללא שם",
     "variants": "גרסאות צבע",
     "noVariants": "אין עדיין גרסאות צבע",
-    "noVariantsHint": "בחרו סכמת צבעים ליצירת הגרסה הראשונה",
+    "noVariantsHint": "בחרו פלטת צבעים ליצירת הגרסה הראשונה",
     "speculativeNote": "צביעת AI היא ספקולטיבית ומבוססת על מחקר היסטורי",
     "download": "הורדה",
     "share": "שיתוף",
@@ -109,7 +105,7 @@
   "settings": {
     "title": "הגדרות",
     "language": "שפה",
-    "defaultScheme": "סכמת צבעים ברירת מחדל",
+    "defaultScheme": "פלטת צבעים ברירת מחדל",
     "restoration": "כללו שחזור כברירת מחדל",
     "restorationDesc": "תיקון אוטומטי של סדקים ונזקים",
     "haptics": "משוב רטט",

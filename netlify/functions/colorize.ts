@@ -3,11 +3,10 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Color scheme type matching frontend
 type ColorScheme =
+  | 'mesopotamian'
+  | 'egyptian'
   | 'roman'
   | 'greek'
-  | 'egyptian'
-  | 'mesopotamian'
-  | 'weathered'
   | 'original'
   | 'custom';
 
@@ -29,6 +28,23 @@ interface ColorizeResponse {
 
 // Historically accurate color scheme prompts
 const COLOR_SCHEME_PROMPTS: Record<ColorScheme, string> = {
+  mesopotamian: `Colorize this archaeological artifact using historically accurate Ancient Mesopotamian colors:
+- Ultramarine and lapis lazuli blue (precious and sacred)
+- Gold and bronze metallic tones
+- Brick red and terracotta (ziggurat colors)
+- Bitumen black
+- White limestone accents
+Apply colors consistent with Babylonian and Assyrian art.`,
+
+  egyptian: `Colorize this archaeological artifact using historically accurate Ancient Egyptian colors:
+- Lapis lazuli blue (sacred color of the sky and Nile)
+- Gold (sacred color of the sun god Ra)
+- Turquoise and Egyptian faience blue
+- Emerald green (color of rebirth and vegetation)
+- Red ochre (color of life and vitality)
+- Black (color of fertile Nile soil)
+Apply colors as they would have appeared in Ancient Egyptian art.`,
+
   roman: `Colorize this archaeological artifact using historically accurate Ancient Roman colors:
 - Vermillion and crimson reds (from cinnabar and iron oxide)
 - Egyptian blue (calcium copper silicate)
@@ -44,30 +60,6 @@ Apply colors as they would have appeared when newly made in Ancient Rome.`,
 - White slip for backgrounds
 - Red-figure style with reserved red on black
 Apply colors consistent with Classical Greek pottery and sculpture.`,
-
-  egyptian: `Colorize this archaeological artifact using historically accurate Ancient Egyptian colors:
-- Lapis lazuli blue (sacred color of the sky and Nile)
-- Gold (sacred color of the sun god Ra)
-- Turquoise and Egyptian faience blue
-- Emerald green (color of rebirth and vegetation)
-- Red ochre (color of life and vitality)
-- Black (color of fertile Nile soil)
-Apply colors as they would have appeared in Ancient Egyptian art.`,
-
-  mesopotamian: `Colorize this archaeological artifact using historically accurate Ancient Mesopotamian colors:
-- Ultramarine and lapis lazuli blue (precious and sacred)
-- Gold and bronze metallic tones
-- Brick red and terracotta (ziggurat colors)
-- Bitumen black
-- White limestone accents
-Apply colors consistent with Babylonian and Assyrian art.`,
-
-  weathered: `Apply historically plausible colors to this artifact, but show them as weathered and aged:
-- Muted, faded versions of original pigments
-- Visible patina and surface degradation
-- Some original color remaining in protected areas
-- Natural aging and oxidation effects
-Show how the artifact might look with its original colors partially preserved.`,
 
   original: `Analyze this archaeological artifact and apply the most historically accurate colors based on:
 - The artifact's apparent culture and time period
@@ -96,7 +88,7 @@ function validateRequest(body: unknown): ColorizeRequest {
   }
 
   const validSchemes: ColorScheme[] = [
-    'roman', 'greek', 'egyptian', 'mesopotamian', 'weathered', 'original', 'custom'
+    'mesopotamian', 'egyptian', 'roman', 'greek', 'original', 'custom'
   ];
 
   if (!validSchemes.includes(req.colorScheme as ColorScheme)) {

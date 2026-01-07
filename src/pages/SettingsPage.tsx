@@ -3,12 +3,12 @@ import { useSettingsStore } from '@/stores/appStore';
 import type { ColorScheme } from '@/types/artifact';
 
 const colorSchemeOptions: { id: ColorScheme; labelKey: string; color: string }[] = [
-  { id: 'original', labelKey: 'schemes.original', color: '#6b6052' },
+  { id: 'mesopotamian', labelKey: 'schemes.mesopotamian', color: '#B8860B' },
   { id: 'egyptian', labelKey: 'schemes.egyptian', color: '#1E3F66' },
   { id: 'roman', labelKey: 'schemes.roman', color: '#8B2942' },
-  { id: 'greek', labelKey: 'schemes.greek', color: '#1a4d5c' },
-  { id: 'mesopotamian', labelKey: 'schemes.mesopotamian', color: '#5c4a1f' },
-  { id: 'weathered', labelKey: 'schemes.weathered', color: '#8B7355' },
+  { id: 'greek', labelKey: 'schemes.greek', color: '#D2691E' },
+  { id: 'original', labelKey: 'schemes.original', color: '#7C3AED' },
+  { id: 'custom', labelKey: 'schemes.custom', color: '#14B8A6' },
 ];
 
 export function SettingsPage() {

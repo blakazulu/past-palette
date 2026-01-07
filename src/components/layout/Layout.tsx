@@ -26,14 +26,14 @@ export function Layout() {
   }, [setOnlineStatus]);
 
   return (
-    <div className="min-h-screen bg-obsidian-950 text-obsidian-100 flex flex-col texture-stone">
-      {/* Global ambient background */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        {/* Top corner glow */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-radial from-gold-500/3 to-transparent" />
-        {/* Bottom corner glow */}
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-radial from-lapis-700/5 to-transparent" />
-      </div>
+    <div className="min-h-screen text-obsidian-100 flex flex-col">
+      {/* Global background image */}
+      <div
+        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(/bg.webp)' }}
+      />
+      {/* Dark overlay for better text readability */}
+      <div className="fixed inset-0 z-0 bg-obsidian-950/40" />
 
       <OfflineIndicator />
       <Header />

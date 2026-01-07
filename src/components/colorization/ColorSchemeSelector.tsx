@@ -5,51 +5,59 @@ interface ColorSchemeOption {
   id: ColorScheme;
   nameKey: string;
   descriptionKey: string;
-  swatches: string[];
+  icon: string;
+  gradient: string;
+  accentColor: string;
 }
 
 const COLOR_SCHEMES: ColorSchemeOption[] = [
   {
+    id: 'mesopotamian',
+    nameKey: 'colorSchemes.mesopotamian',
+    descriptionKey: 'colorSchemes.mesopotamianDesc',
+    icon: '𒀭',
+    gradient: 'from-amber-800 via-yellow-700 to-amber-900',
+    accentColor: '#B8860B',
+  },
+  {
     id: 'egyptian',
     nameKey: 'colorSchemes.egyptian',
     descriptionKey: 'colorSchemes.egyptianDesc',
-    swatches: ['#1E3F66', '#FFD700', '#40E0D0', '#228B22'],
+    icon: '𓂀',
+    gradient: 'from-blue-800 via-cyan-600 to-blue-900',
+    accentColor: '#1E3F66',
   },
   {
     id: 'roman',
     nameKey: 'colorSchemes.roman',
     descriptionKey: 'colorSchemes.romanDesc',
-    swatches: ['#C41E3A', '#1E4D8C', '#DAA520', '#CD853F'],
+    icon: '🏛',
+    gradient: 'from-red-900 via-red-700 to-red-950',
+    accentColor: '#8B2942',
   },
   {
     id: 'greek',
     nameKey: 'colorSchemes.greek',
     descriptionKey: 'colorSchemes.greekDesc',
-    swatches: ['#D2691E', '#1C1C1C', '#4169E1', '#FFFAF0'],
-  },
-  {
-    id: 'mesopotamian',
-    nameKey: 'colorSchemes.mesopotamian',
-    descriptionKey: 'colorSchemes.mesopotamianDesc',
-    swatches: ['#000080', '#B8860B', '#8B4513', '#1C1C1C'],
-  },
-  {
-    id: 'weathered',
-    nameKey: 'colorSchemes.weathered',
-    descriptionKey: 'colorSchemes.weatheredDesc',
-    swatches: ['#9B8B7A', '#7A6B5A', '#5A4B3A', '#8B7355'],
+    icon: '🏺',
+    gradient: 'from-orange-800 via-amber-600 to-orange-900',
+    accentColor: '#D2691E',
   },
   {
     id: 'original',
     nameKey: 'colorSchemes.original',
     descriptionKey: 'colorSchemes.originalDesc',
-    swatches: ['#A0A0A0', '#808080', '#606060', '#404040'],
+    icon: '🤖',
+    gradient: 'from-violet-800 via-purple-600 to-violet-900',
+    accentColor: '#7C3AED',
   },
   {
     id: 'custom',
     nameKey: 'colorSchemes.custom',
     descriptionKey: 'colorSchemes.customDesc',
-    swatches: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4'],
+    icon: '✨',
+    gradient: 'from-emerald-800 via-teal-600 to-emerald-900',
+    accentColor: '#14B8A6',
   },
 ];
 
@@ -67,54 +75,71 @@ export function ColorSchemeSelector({
   const { t } = useTranslation();
 
   return (
-    <div className="space-y-3">
-      <label className="block text-sm font-medium text-ancient-300">
+    <div className="space-y-4">
+      <label className="block text-sm font-medium text-gold-400/90 uppercase tracking-wider font-display">
         {t('colorization.selectScheme')}
       </label>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {COLOR_SCHEMES.map((scheme) => (
-          <button
-            key={scheme.id}
-            type="button"
-            disabled={disabled}
-            onClick={() => onSelect(scheme.id)}
-            className={`
-              relative p-4 rounded-xl border-2 text-left transition-all
-              ${
-                selected === scheme.id
-                  ? 'border-gold-500 bg-ancient-800/80'
-                  : 'border-ancient-700 bg-ancient-800/40 hover:border-ancient-600'
-              }
-              ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-            `}
-          >
-            {/* Selection indicator */}
-            {selected === scheme.id && (
-              <div className="absolute top-2 right-2">
-                <CheckIcon className="w-5 h-5 text-gold-500" />
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {COLOR_SCHEMES.map((scheme) => {
+          const isSelected = selected === scheme.id;
+          return (
+            <button
+              key={scheme.id}
+              type="button"
+              disabled={disabled}
+              onClick={() => onSelect(scheme.id)}
+              className={`
+                group relative overflow-hidden rounded-xl p-4 text-center
+                transition-all duration-300 transform
+                ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:scale-[1.02] active:scale-[0.98]'}
+                ${isSelected
+                  ? 'ring-2 ring-gold-400 ring-offset-2 ring-offset-obsidian-900 shadow-lg shadow-gold-500/20'
+                  : 'hover:ring-1 hover:ring-gold-500/30'
+                }
+              `}
+            >
+              {/* Background gradient */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${scheme.gradient} opacity-90`} />
+
+              {/* Dark overlay for better text readability */}
+              <div className="absolute inset-0 bg-obsidian-950/30" />
+
+              {/* Shine effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+
+              {/* Selection indicator */}
+              {isSelected && (
+                <div className="absolute top-2 right-2 z-20">
+                  <div className="w-5 h-5 rounded-full bg-gold-400 flex items-center justify-center">
+                    <CheckIcon className="w-3 h-3 text-obsidian-950" />
+                  </div>
+                </div>
+              )}
+
+              {/* Content */}
+              <div className="relative z-10 flex flex-col items-center gap-2">
+                {/* Icon */}
+                <span className="text-3xl sm:text-4xl drop-shadow-lg">{scheme.icon}</span>
+
+                {/* Name */}
+                <h3 className="text-sm sm:text-base font-semibold text-white font-display uppercase tracking-wide drop-shadow-md">
+                  {t(scheme.nameKey)}
+                </h3>
+
+                {/* Description - visible on larger screens */}
+                <p className="hidden sm:block text-[10px] sm:text-xs text-white/70 leading-tight line-clamp-2">
+                  {t(scheme.descriptionKey)}
+                </p>
               </div>
-            )}
 
-            {/* Swatches */}
-            <div className="flex gap-1 mb-3">
-              {scheme.swatches.map((color, index) => (
-                <div
-                  key={index}
-                  className="w-6 h-6 rounded-full border border-ancient-600"
-                  style={{ backgroundColor: color }}
-                />
-              ))}
-            </div>
-
-            {/* Name and description */}
-            <h3 className="text-sm font-semibold text-ancient-100">
-              {t(scheme.nameKey)}
-            </h3>
-            <p className="text-xs text-ancient-400 mt-1">
-              {t(scheme.descriptionKey)}
-            </p>
-          </button>
-        ))}
+              {/* Bottom accent line */}
+              <div
+                className={`absolute bottom-0 left-0 right-0 h-1 transition-all duration-300 ${isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-50'}`}
+                style={{ backgroundColor: scheme.accentColor }}
+              />
+            </button>
+          );
+        })}
       </div>
     </div>
   );
@@ -127,12 +152,12 @@ function CheckIcon({ className }: { className?: string }) {
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
-      strokeWidth={2}
+      strokeWidth={3}
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        d="M5 13l4 4L19 7"
       />
     </svg>
   );

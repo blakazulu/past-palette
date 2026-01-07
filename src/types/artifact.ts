@@ -6,11 +6,10 @@ export type ArtifactStatus =
   | 'error';
 
 export type ColorScheme =
+  | 'mesopotamian'
+  | 'egyptian'
   | 'roman'
   | 'greek'
-  | 'egyptian'
-  | 'mesopotamian'
-  | 'weathered'
   | 'original'
   | 'custom';
 
