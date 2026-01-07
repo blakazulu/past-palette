@@ -12,7 +12,7 @@ export function ArtifactDetailPage() {
   const { id } = useParams<{ id: string }>();
   const [activeTab, setActiveTab] = useState<TabId>('colors');
 
-  const { artifact, variants, primaryImage, isLoading } = useArtifactData(id);
+  const { artifact, variants, variantsLoaded, primaryImage, isLoading } = useArtifactData(id);
   const deleteVariant = useDeleteVariant();
   const deleteArtifact = useDeleteArtifact();
   const updateArtifactName = useUpdateArtifactName();
@@ -132,6 +132,7 @@ export function ArtifactDetailPage() {
             artifactId={artifact.id}
             artifactName={artifact.metadata.name}
             variants={variants}
+            variantsLoaded={variantsLoaded}
             primaryImage={primaryImage}
             onDeleteVariant={handleDeleteVariant}
           />

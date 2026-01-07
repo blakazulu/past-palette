@@ -96,13 +96,13 @@ export function ArtifactHeader({ artifact, onDelete, onNameChange }: ArtifactHea
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-sm text-obsidian-500">
+          <div className="flex items-center gap-2 text-sm text-obsidian-300">
             <CalendarIcon className="w-3.5 h-3.5" />
             <span>{formatDate(artifact.createdAt)}</span>
             {artifact.metadata.siteName && (
               <>
-                <span className="text-obsidian-600">&middot;</span>
-                <span className="text-gold-500/60">{artifact.metadata.siteName}</span>
+                <span className="text-obsidian-400">&middot;</span>
+                <span className="text-gold-400/80">{artifact.metadata.siteName}</span>
               </>
             )}
           </div>

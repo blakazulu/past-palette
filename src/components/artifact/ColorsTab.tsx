@@ -12,6 +12,7 @@ interface ColorsTabProps {
   artifactId: string;
   artifactName?: string;
   variants: ColorVariant[];
+  variantsLoaded: boolean;
   primaryImage: ArtifactImage | undefined;
   onDeleteVariant: (variantId: string) => void;
 }
@@ -20,13 +21,21 @@ export function ColorsTab({
   artifactId,
   artifactName,
   variants,
+  variantsLoaded,
   primaryImage,
   onDeleteVariant,
 }: ColorsTabProps) {
   const [selectedVariant, setSelectedVariant] = useState<ColorVariant | null>(null);
-  const [showColorizer, setShowColorizer] = useState(variants.length === 0);
+  const [showColorizer, setShowColorizer] = useState<boolean | null>(null);
 
   const { colorize, step, progress, error, variant: newVariant, reset } = useColorize();
+
+  // Initialize showColorizer after variants are loaded
+  useEffect(() => {
+    if (variantsLoaded && showColorizer === null) {
+      setShowColorizer(variants.length === 0);
+    }
+  }, [variantsLoaded, variants.length, showColorizer]);
 
   // Auto-navigate to the new variant when colorization completes
   useEffect(() => {
@@ -98,6 +107,11 @@ export function ColorsTab({
         onDelete={handleDeleteSelectedVariant}
       />
     );
+  }
+
+  // Still loading variants
+  if (showColorizer === null) {
+    return null;
   }
 
   // Show colorizer

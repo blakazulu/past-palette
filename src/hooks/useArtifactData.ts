@@ -6,6 +6,7 @@ interface UseArtifactDataReturn {
   artifact: Artifact | undefined;
   images: ArtifactImage[];
   variants: ColorVariant[];
+  variantsLoaded: boolean;
   primaryImage: ArtifactImage | undefined;
   isLoading: boolean;
 }
@@ -27,13 +28,15 @@ export function useArtifactData(artifactId: string | undefined): UseArtifactData
   ) || [];
 
   // Live query for variants
-  const variants = useLiveQuery(
+  const variantsQuery = useLiveQuery(
     () =>
       artifactId
         ? db.colorVariants.where('artifactId').equals(artifactId).toArray()
         : [],
     [artifactId]
-  ) || [];
+  );
+  const variants = variantsQuery || [];
+  const variantsLoaded = variantsQuery !== undefined;
 
   // Get primary image (first one)
   const primaryImage = images[0];
@@ -45,6 +48,7 @@ export function useArtifactData(artifactId: string | undefined): UseArtifactData
     artifact,
     images,
     variants,
+    variantsLoaded,
     primaryImage,
     isLoading,
   };

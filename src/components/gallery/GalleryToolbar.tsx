@@ -29,7 +29,8 @@ export function GalleryToolbar({
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder={t('gallery.search')}
-          className="input-ancient w-full pl-11 pr-4 py-3 text-base"
+          className="input-ancient w-full pr-4 py-3 text-base"
+          style={{ paddingLeft: '2.75rem' }}
         />
         {/* Bottom glow on focus */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/50 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity" />

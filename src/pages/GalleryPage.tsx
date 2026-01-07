@@ -37,10 +37,9 @@ export function GalleryPage() {
             {t('gallery.title')}
           </h1>
         </div>
-        <p className="text-obsidian-400 text-base ml-11">
+        <p className="text-obsidian-300 text-base ml-11">
           {hasArtifacts
-            ? t('gallery.subtitle', { count: artifacts.length }) ||
-              `${artifacts.length} artifact${artifacts.length !== 1 ? 's' : ''} in your collection`
+            ? t('gallery.subtitle', { count: artifacts.length })
             : t('gallery.emptyHint')}
         </p>
       </div>

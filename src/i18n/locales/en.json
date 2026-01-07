@@ -75,6 +75,8 @@
   },
   "gallery": {
     "title": "My Artifacts",
+    "subtitle_one": "{{count}} artifact in your collection",
+    "subtitle_other": "{{count}} artifacts in your collection",
     "empty": "No artifacts yet",
     "emptyHint": "Capture your first artifact to get started",
     "search": "Search artifacts...",
