@@ -43,7 +43,7 @@ export function ArtifactHeader({ artifact, onDelete }: ArtifactHeaderProps) {
             </h1>
             <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-obsidian-800/80">
               <div className={`w-2 h-2 rounded-full ${statusConfig.color}`} />
-              <span className="text-[10px] text-obsidian-400 font-display tracking-wider uppercase">
+              <span className="text-sm text-obsidian-400 font-display tracking-wider uppercase">
                 {statusConfig.label}
               </span>
             </div>

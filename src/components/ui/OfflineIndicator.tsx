@@ -35,7 +35,7 @@ export function OfflineIndicator() {
   return (
     <div
       className={`
-        fixed top-0 left-0 right-0 z-50 px-4 py-2 text-center text-sm font-medium transition-colors
+        fixed top-0 left-0 right-0 z-50 px-4 py-2 text-center text-base font-medium transition-colors
         ${isOffline ? 'bg-amber-600 text-amber-50' : 'bg-green-600 text-green-50'}
       `}
     >

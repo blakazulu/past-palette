@@ -64,7 +64,7 @@ export function ColorVariantCard({
 
       {/* Color scheme badge */}
       <div className="absolute top-2 left-2">
-        <span className="px-2 py-1 text-xs font-medium rounded-full bg-ancient-900/80 text-ancient-100 backdrop-blur-sm">
+        <span className="px-2 py-1 text-sm font-medium rounded-full bg-ancient-900/80 text-ancient-100 backdrop-blur-sm">
           {getSchemeLabel(variant.colorScheme)}
         </span>
       </div>
@@ -86,7 +86,7 @@ export function ColorVariantCard({
 
       {/* Bottom info */}
       <div className="absolute bottom-0 left-0 right-0 p-3">
-        <p className="text-xs text-ancient-400">{formatDate(variant.createdAt)}</p>
+        <p className="text-sm text-ancient-400">{formatDate(variant.createdAt)}</p>
       </div>
 
       {/* Selected checkmark */}

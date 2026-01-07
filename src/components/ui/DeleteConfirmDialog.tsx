@@ -49,7 +49,7 @@ export function DeleteConfirmDialog({
         <h2 className="text-lg font-semibold text-ancient-100 mb-2">
           {title || t('gallery.deleteConfirm')}
         </h2>
-        <p className="text-sm text-ancient-400 mb-6">
+        <p className="text-base text-ancient-400 mb-6">
           {message || t('gallery.deleteWarning')}
         </p>
         <div className="flex gap-3">

@@ -58,7 +58,7 @@ export function ColorizationCard({
       {/* Custom prompt input */}
       {selectedScheme === 'custom' && (
         <div className="space-y-2 animate-reveal-up">
-          <label className="block text-sm font-medium text-gold-400/80 font-display uppercase tracking-wider">
+          <label className="block text-base font-medium text-gold-400/80 font-display uppercase tracking-wider">
             {t('colorization.customPromptLabel')}
           </label>
           <textarea
@@ -75,10 +75,10 @@ export function ColorizationCard({
       {/* Restoration toggle */}
       <div className="flex items-center justify-between p-3 sm:p-4 rounded-xl bg-obsidian-900/40 border border-gold-500/10">
         <div className="flex-1 mr-4">
-          <p className="text-sm sm:text-base font-medium text-obsidian-100">
+          <p className="text-base font-medium text-obsidian-100">
             {t('colorization.includeRestoration')}
           </p>
-          <p className="text-xs sm:text-sm text-obsidian-400 mt-0.5">
+          <p className="text-sm text-obsidian-400 mt-0.5">
             {t('colorization.restorationHint')}
           </p>
         </div>
@@ -117,7 +117,7 @@ export function ColorizationCard({
           (selectedScheme === 'custom' && !customPrompt.trim())
         }
         className={`
-          w-full py-3.5 sm:py-4 rounded-xl font-display uppercase tracking-wider text-sm sm:text-base font-semibold transition-all
+          w-full py-4 rounded-xl font-display uppercase tracking-wider text-base font-semibold transition-all
           ${
             isProcessing || disabled || (selectedScheme === 'custom' && !customPrompt.trim())
               ? 'bg-obsidian-800 text-obsidian-500 cursor-not-allowed border border-obsidian-700'
@@ -138,7 +138,7 @@ export function ColorizationCard({
       </button>
 
       {/* Speculative notice */}
-      <p className="text-xs text-obsidian-400 text-center leading-relaxed">
+      <p className="text-sm text-obsidian-400 text-center leading-relaxed">
         {t('colorization.speculativeNotice')}
       </p>
     </div>

@@ -131,12 +131,12 @@ export function BeforeAfterSlider({
 
       {/* Labels */}
       <div className="absolute bottom-3 left-3 px-2 py-1 rounded-lg bg-ancient-900/80 backdrop-blur-sm">
-        <span className="text-xs font-medium text-ancient-100">
+        <span className="text-sm font-medium text-ancient-100">
           {beforeLabel || t('artifact.before')}
         </span>
       </div>
       <div className="absolute bottom-3 right-3 px-2 py-1 rounded-lg bg-ancient-900/80 backdrop-blur-sm">
-        <span className="text-xs font-medium text-ancient-100">
+        <span className="text-sm font-medium text-ancient-100">
           {afterLabel || t('artifact.after')}
         </span>
       </div>

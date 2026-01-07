@@ -41,7 +41,7 @@ export function SettingsPage() {
             {t('settings.title')}
           </h1>
         </div>
-        <p className="text-obsidian-400 text-sm ml-11">
+        <p className="text-obsidian-400 text-base ml-11">
           {t('settings.subtitle') || 'Customize your experience'}
         </p>
       </div>
@@ -91,7 +91,7 @@ export function SettingsPage() {
                   className="w-full aspect-square rounded-lg mb-2"
                   style={{ backgroundColor: option.color }}
                 />
-                <span className={`text-xs font-display tracking-wider ${
+                <span className={`text-sm font-display tracking-wider ${
                   defaultColorScheme === option.id ? 'text-gold-400' : 'text-obsidian-400'
                 }`}>
                   {t(option.labelKey)}
@@ -136,11 +136,11 @@ export function SettingsPage() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-obsidian-300 font-display tracking-wide">PastPalette</p>
-              <p className="text-xs text-obsidian-500">{t('settings.version')}: 0.1.0</p>
+              <p className="text-sm text-obsidian-500">{t('settings.version')}: 0.1.0</p>
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-lapis-500/10 border border-lapis-500/20">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-xs text-lapis-400 font-display tracking-wider">BETA</span>
+              <span className="text-sm text-lapis-400 font-display tracking-wider">BETA</span>
             </div>
           </div>
         </SettingCard>
@@ -180,11 +180,11 @@ function SettingCard({
           {icon}
         </div>
         <div>
-          <h3 className="font-display text-sm tracking-wider uppercase text-obsidian-100">
+          <h3 className="font-display text-base tracking-wider uppercase text-obsidian-100">
             {title}
           </h3>
           {description && (
-            <p className="text-xs text-obsidian-500 mt-0.5">{description}</p>
+            <p className="text-sm text-obsidian-500 mt-0.5">{description}</p>
           )}
         </div>
       </div>
@@ -237,9 +237,9 @@ function ToggleRow({
   return (
     <div className="flex items-center justify-between gap-4">
       <div className="flex-1">
-        <p className="text-sm text-obsidian-200">{label}</p>
+        <p className="text-base text-obsidian-200">{label}</p>
         {description && (
-          <p className="text-xs text-obsidian-500 mt-0.5">{description}</p>
+          <p className="text-sm text-obsidian-500 mt-0.5">{description}</p>
         )}
       </div>
       <button

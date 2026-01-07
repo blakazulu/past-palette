@@ -108,7 +108,7 @@ export function ColorsTab({
           <button
             type="button"
             onClick={() => setShowColorizer(false)}
-            className="w-full py-2 text-sm text-ancient-400 hover:text-ancient-200 transition-colors"
+            className="w-full py-2 text-base text-ancient-400 hover:text-ancient-200 transition-colors"
           >
             &larr; Back to variants
           </button>

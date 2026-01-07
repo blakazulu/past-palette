@@ -26,7 +26,7 @@ export function ColorVariantGallery({
           <PaletteIcon className="w-8 h-8 text-ancient-500" />
         </div>
         <p className="text-ancient-300 mb-2">{t('artifact.noVariants')}</p>
-        <p className="text-sm text-ancient-500 text-center mb-6 max-w-xs">
+        <p className="text-base text-ancient-500 text-center mb-6 max-w-xs">
           {t('artifact.noVariantsHint')}
         </p>
         {onAddVariant && (
@@ -46,14 +46,14 @@ export function ColorVariantGallery({
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium text-ancient-300">
+        <h3 className="text-base font-medium text-ancient-300">
           {t('artifact.variants')} ({variants.length})
         </h3>
         {onAddVariant && (
           <button
             type="button"
             onClick={onAddVariant}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg bg-ancient-800 text-ancient-200 hover:bg-ancient-700 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-base font-medium rounded-lg bg-ancient-800 text-ancient-200 hover:bg-ancient-700 transition-colors"
           >
             <PlusIcon className="w-4 h-4" />
             {t('colorization.addVariant')}

@@ -158,7 +158,7 @@ export function CaptureSession() {
       <div className="flex p-1 rounded-xl glass-panel mb-6 opacity-0-initial animate-reveal-up delay-100">
         <button
           onClick={() => setMode('camera')}
-          className={`relative px-5 py-2.5 rounded-lg font-display text-xs tracking-wider uppercase transition-all ${
+          className={`relative px-5 py-2.5 rounded-lg font-display text-sm tracking-wider uppercase transition-all ${
             mode === 'camera'
               ? 'text-obsidian-950'
               : 'text-obsidian-400 hover:text-obsidian-200'
@@ -174,7 +174,7 @@ export function CaptureSession() {
         </button>
         <button
           onClick={() => setMode('upload')}
-          className={`relative px-5 py-2.5 rounded-lg font-display text-xs tracking-wider uppercase transition-all ${
+          className={`relative px-5 py-2.5 rounded-lg font-display text-sm tracking-wider uppercase transition-all ${
             mode === 'upload'
               ? 'text-obsidian-950'
               : 'text-obsidian-400 hover:text-obsidian-200'
@@ -192,7 +192,7 @@ export function CaptureSession() {
 
       {/* Error message */}
       {error && (
-        <div className="mb-6 px-5 py-4 rounded-xl glass-panel border-l-2 border-red-500 text-red-400 text-sm max-w-md w-full opacity-0-initial animate-reveal-scale">
+        <div className="mb-6 px-5 py-4 rounded-xl glass-panel border-l-2 border-red-500 text-red-400 text-base max-w-md w-full opacity-0-initial animate-reveal-scale">
           <div className="flex items-start gap-3">
             <ErrorIcon className="w-5 h-5 flex-shrink-0 mt-0.5" />
             <p>{error}</p>

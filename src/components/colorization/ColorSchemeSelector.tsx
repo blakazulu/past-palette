@@ -76,7 +76,7 @@ export function ColorSchemeSelector({
 
   return (
     <div className="space-y-4">
-      <label className="block text-sm font-medium text-gold-400/90 uppercase tracking-wider font-display">
+      <label className="block text-base font-medium text-gold-400/90 uppercase tracking-wider font-display">
         {t('colorization.selectScheme')}
       </label>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -122,12 +122,12 @@ export function ColorSchemeSelector({
                 <span className="text-3xl sm:text-4xl drop-shadow-lg">{scheme.icon}</span>
 
                 {/* Name */}
-                <h3 className="text-sm sm:text-base font-semibold text-white font-display uppercase tracking-wide drop-shadow-md">
+                <h3 className="text-base font-semibold text-white font-display uppercase tracking-wide drop-shadow-md">
                   {t(scheme.nameKey)}
                 </h3>
 
                 {/* Description - visible on larger screens */}
-                <p className="hidden sm:block text-[10px] sm:text-xs text-white/70 leading-tight line-clamp-2">
+                <p className="hidden sm:block text-sm text-white/70 leading-tight line-clamp-2">
                   {t(scheme.descriptionKey)}
                 </p>
               </div>

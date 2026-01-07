@@ -30,7 +30,7 @@ export function GalleryEmpty() {
       <p className="text-obsidian-400 text-center max-w-sm mb-2 leading-relaxed">
         {t('gallery.empty')}
       </p>
-      <p className="text-obsidian-500 text-sm text-center max-w-xs mb-8">
+      <p className="text-obsidian-500 text-base text-center max-w-xs mb-8">
         {t('gallery.emptyHint')}
       </p>
 
@@ -40,7 +40,7 @@ export function GalleryEmpty() {
       </div>
 
       {/* CTA Button */}
-      <Link to="/capture" className="btn-gold text-sm">
+      <Link to="/capture" className="btn-gold text-base">
         <span className="flex items-center gap-2">
           <CameraIcon className="w-4 h-4" />
           {t('home.getStarted')}

@@ -70,7 +70,7 @@ export function ColorizationProgress({
 
         {/* Message */}
         <span
-          className={`text-sm ${
+          className={`text-base ${
             isError ? 'text-red-400' : isComplete ? 'text-green-400' : 'text-ancient-300'
           }`}
         >
@@ -79,7 +79,7 @@ export function ColorizationProgress({
 
         {/* Progress percentage */}
         {!isError && !isComplete && (
-          <span className="text-sm text-ancient-500 ml-auto">{Math.round(progress)}%</span>
+          <span className="text-base text-ancient-500 ml-auto">{Math.round(progress)}%</span>
         )}
       </div>
     </div>

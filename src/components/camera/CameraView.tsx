@@ -117,7 +117,7 @@ export function CameraView({ onCapture, onError }: CameraViewProps) {
         {!isReady && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-obsidian-950">
             <div className="spinner-gold mb-4" />
-            <p className="text-obsidian-400 text-sm font-display tracking-wider">
+            <p className="text-obsidian-400 text-base font-display tracking-wider">
               {t('capture.initializing') || 'Initializing camera...'}
             </p>
           </div>
@@ -176,7 +176,7 @@ export function CameraView({ onCapture, onError }: CameraViewProps) {
       </div>
 
       {/* Tip */}
-      <p className="mt-6 text-xs text-obsidian-500 text-center font-display tracking-wider">
+      <p className="mt-6 text-sm text-obsidian-500 text-center font-display tracking-wider">
         {t('capture.tip') || 'Position artifact in center for best results'}
       </p>
     </div>

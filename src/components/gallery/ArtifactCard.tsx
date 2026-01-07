@@ -56,7 +56,7 @@ export function ArtifactCard({ artifact, index = 0 }: ArtifactCardProps) {
           {/* Status indicator */}
           <div className="flex items-center gap-2">
             <div className={`w-2 h-2 rounded-full ${statusConfig.color}`} />
-            <span className="text-[10px] text-obsidian-300 font-display tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity">
+            <span className="text-sm text-obsidian-300 font-display tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity">
               {statusConfig.label}
             </span>
           </div>
@@ -65,7 +65,7 @@ export function ArtifactCard({ artifact, index = 0 }: ArtifactCardProps) {
           {variantCount > 0 && (
             <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-gold-500/20 backdrop-blur-sm border border-gold-500/30">
               <ColorPaletteIcon className="w-3 h-3 text-gold-400" />
-              <span className="text-xs text-gold-300 font-display">{variantCount}</span>
+              <span className="text-sm text-gold-300 font-display">{variantCount}</span>
             </div>
           )}
         </div>
@@ -76,12 +76,12 @@ export function ArtifactCard({ artifact, index = 0 }: ArtifactCardProps) {
           <div className="w-8 h-0.5 bg-gradient-to-r from-gold-500 to-transparent mb-3 group-hover:w-16 transition-all duration-500" />
 
           {/* Name */}
-          <h3 className="font-display text-sm sm:text-base text-obsidian-50 tracking-wide uppercase truncate mb-1">
+          <h3 className="font-display text-base text-obsidian-50 tracking-wide uppercase truncate mb-1">
             {artifact.metadata.name || t('artifact.untitled')}
           </h3>
 
           {/* Meta info */}
-          <div className="flex items-center gap-3 text-xs text-obsidian-400">
+          <div className="flex items-center gap-3 text-sm text-obsidian-400">
             <span className="flex items-center gap-1">
               <CalendarIcon className="w-3 h-3" />
               {formatDate(artifact.createdAt)}

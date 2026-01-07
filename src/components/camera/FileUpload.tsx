@@ -102,17 +102,17 @@ export function FileUpload({ onFileSelect, onError }: FileUploadProps) {
         <p className={`text-lg font-display tracking-wide mb-2 transition-colors ${isDragging ? 'text-gold-300' : 'text-obsidian-200'}`}>
           {isDragging ? t('capture.dropHere') || 'Drop your image here' : t('capture.dragDrop')}
         </p>
-        <p className="text-obsidian-500 text-sm mb-3">
+        <p className="text-obsidian-500 text-base mb-3">
           {t('capture.or')}
         </p>
-        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gold-500/10 border border-gold-500/20 text-gold-400 text-sm font-display tracking-wider transition-all hover:bg-gold-500/20">
+        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gold-500/10 border border-gold-500/20 text-gold-400 text-base font-display tracking-wider transition-all hover:bg-gold-500/20">
           <FolderIcon className="w-4 h-4" />
           {t('capture.selectFile')}
         </span>
       </div>
 
       {/* Supported formats */}
-      <p className="text-xs text-obsidian-600 text-center">
+      <p className="text-sm text-obsidian-600 text-center">
         JPG, PNG, HEIC, WebP
       </p>
 

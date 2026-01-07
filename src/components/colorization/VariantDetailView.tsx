@@ -59,7 +59,7 @@ export function VariantDetailView({
           <h3 className="text-lg font-semibold text-ancient-100">
             {getSchemeLabel(variant.colorScheme)}
           </h3>
-          <p className="text-xs text-ancient-500">{formatDate(variant.createdAt)}</p>
+          <p className="text-sm text-ancient-500">{formatDate(variant.createdAt)}</p>
         </div>
         {onClose && (
           <button
@@ -80,7 +80,7 @@ export function VariantDetailView({
             type="button"
             onClick={() => setViewMode(mode)}
             className={`
-              flex-1 px-4 py-3 text-sm font-medium transition-colors
+              flex-1 px-4 py-3 text-base font-medium transition-colors
               ${
                 viewMode === mode
                   ? 'text-gold-500 border-b-2 border-gold-500 bg-ancient-800/50'
@@ -122,7 +122,7 @@ export function VariantDetailView({
 
       {/* Speculative notice */}
       <div className="px-4 pb-2">
-        <p className="text-xs text-ancient-500 text-center">
+        <p className="text-sm text-ancient-500 text-center">
           {t('artifact.speculativeNote')}
         </p>
       </div>

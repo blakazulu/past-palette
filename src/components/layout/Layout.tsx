@@ -38,7 +38,9 @@ export function Layout() {
       <OfflineIndicator />
       <Header />
       <main className="relative z-10 flex-1 pb-24">
-        <Outlet />
+        <div className="max-w-4xl mx-auto">
+          <Outlet />
+        </div>
       </main>
       <BottomNav />
       <InstallPrompt />

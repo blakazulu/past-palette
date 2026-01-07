@@ -52,7 +52,7 @@ export function BottomNav() {
 
                 {/* Label */}
                 <span
-                  className={`text-[10px] font-display tracking-wider uppercase transition-colors duration-300 ${
+                  className={`text-sm font-display tracking-wider uppercase transition-colors duration-300 ${
                     isActive
                       ? 'text-gold-400'
                       : 'text-obsidian-500 group-hover:text-obsidian-300'

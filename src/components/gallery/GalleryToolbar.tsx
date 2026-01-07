@@ -29,7 +29,7 @@ export function GalleryToolbar({
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder={t('gallery.search')}
-          className="input-ancient w-full pl-11 pr-4 py-3 text-sm"
+          className="input-ancient w-full pl-11 pr-4 py-3 text-base"
         />
         {/* Bottom glow on focus */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/50 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity" />
@@ -40,7 +40,7 @@ export function GalleryToolbar({
         <select
           value={sortBy}
           onChange={(e) => onSortChange(e.target.value as SortOption)}
-          className="select-ancient text-sm min-w-[140px]"
+          className="select-ancient text-base min-w-[140px]"
         >
           <option value="newest">{t('gallery.sortNewest')}</option>
           <option value="oldest">{t('gallery.sortOldest')}</option>
@@ -49,10 +49,10 @@ export function GalleryToolbar({
 
         {/* Result count badge */}
         <div className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-lg bg-obsidian-800/50 border border-obsidian-700/50">
-          <span className="text-sm text-obsidian-400">
+          <span className="text-base text-obsidian-400">
             {resultCount}
           </span>
-          <span className="text-xs text-obsidian-500 font-display tracking-wider uppercase">
+          <span className="text-sm text-obsidian-500 font-display tracking-wider uppercase">
             {resultCount === 1 ? 'item' : 'items'}
           </span>
         </div>

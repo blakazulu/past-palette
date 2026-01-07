@@ -74,7 +74,7 @@ export function OriginalTab({ image, metadata, artifactName }: OriginalTabProps)
             <div className="w-8 h-8 rounded-lg bg-obsidian-800/80 flex items-center justify-center">
               <InfoIcon className="w-4 h-4 text-gold-500/70" />
             </div>
-            <h3 className="font-display text-sm tracking-wider uppercase text-obsidian-200">
+            <h3 className="font-display text-base tracking-wider uppercase text-obsidian-200">
               {t('artifact.details') || 'Details'}
             </h3>
           </div>
@@ -93,19 +93,19 @@ export function OriginalTab({ image, metadata, artifactName }: OriginalTabProps)
 
           {metadata.notes && (
             <div className="pt-3 border-t border-obsidian-700/50">
-              <p className="text-xs text-obsidian-500 mb-2 font-display tracking-wider uppercase">{t('artifact.notes') || 'Notes'}</p>
-              <p className="text-sm text-obsidian-300 leading-relaxed">{metadata.notes}</p>
+              <p className="text-sm text-obsidian-500 mb-2 font-display tracking-wider uppercase">{t('artifact.notes') || 'Notes'}</p>
+              <p className="text-base text-obsidian-300 leading-relaxed">{metadata.notes}</p>
             </div>
           )}
 
           {metadata.tags && metadata.tags.length > 0 && (
             <div className="pt-3 border-t border-obsidian-700/50">
-              <p className="text-xs text-obsidian-500 mb-2 font-display tracking-wider uppercase">{t('artifact.tags') || 'Tags'}</p>
+              <p className="text-sm text-obsidian-500 mb-2 font-display tracking-wider uppercase">{t('artifact.tags') || 'Tags'}</p>
               <div className="flex flex-wrap gap-2">
                 {metadata.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 text-xs rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-400 font-display tracking-wider"
+                    className="px-3 py-1.5 text-sm rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-400 font-display tracking-wider"
                   >
                     {tag}
                   </span>
@@ -117,7 +117,7 @@ export function OriginalTab({ image, metadata, artifactName }: OriginalTabProps)
       )}
 
       {/* Image dimensions */}
-      <div className="flex items-center justify-center gap-2 text-xs text-obsidian-500">
+      <div className="flex items-center justify-center gap-2 text-sm text-obsidian-500">
         <DimensionsIcon className="w-4 h-4" />
         <span>{image.width} × {image.height} pixels</span>
       </div>
@@ -133,8 +133,8 @@ function MetadataRow({ icon, label, value }: { icon: React.ReactNode; label: str
         {icon}
       </div>
       <div className="flex-1 flex justify-between gap-4">
-        <span className="text-sm text-obsidian-500">{label}</span>
-        <span className="text-sm text-obsidian-200 text-right">{value}</span>
+        <span className="text-base text-obsidian-500">{label}</span>
+        <span className="text-base text-obsidian-200 text-right">{value}</span>
       </div>
     </div>
   );

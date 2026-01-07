@@ -51,7 +51,7 @@ export function HomePage() {
           <div className="relative animate-float">
             {/* AI Badge */}
             <div className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 z-20">
-              <div className="bg-gradient-to-br from-gold-400 to-gold-600 text-obsidian-950 font-bold text-xs sm:text-sm px-2 py-0.5 sm:px-3 sm:py-1 rounded-full shadow-lg shadow-gold-500/30 font-display">
+              <div className="bg-gradient-to-br from-gold-400 to-gold-600 text-obsidian-950 font-bold text-sm px-3 py-1 rounded-full shadow-lg shadow-gold-500/30 font-display">
                 AI
               </div>
             </div>
@@ -71,7 +71,7 @@ export function HomePage() {
         </h1>
 
         {/* Subtitle */}
-        <p className="text-obsidian-200 text-sm sm:text-base md:text-lg text-center max-w-md mb-8 sm:mb-10 opacity-0-initial animate-reveal-up delay-200 leading-relaxed px-4">
+        <p className="text-obsidian-200 text-base md:text-lg text-center max-w-md mb-8 sm:mb-10 opacity-0-initial animate-reveal-up delay-200 leading-relaxed px-4">
           {t('home.subtitle')}
         </p>
 
@@ -84,7 +84,7 @@ export function HomePage() {
               style={{ animationDelay: `${300 + index * 50}ms` }}
             >
               <span className="text-base sm:text-lg">{scheme.icon}</span>
-              <span className="text-xs sm:text-sm text-obsidian-200 font-display uppercase tracking-wider group-hover:text-gold-300 transition-colors">
+              <span className="text-sm text-obsidian-200 font-display uppercase tracking-wider group-hover:text-gold-300 transition-colors">
                 {t(`colorSchemes.${scheme.id}`)}
               </span>
             </div>
@@ -95,7 +95,7 @@ export function HomePage() {
         <div className="w-full max-w-xs sm:max-w-sm px-4 opacity-0-initial animate-reveal-up delay-400">
           <Link
             to="/capture"
-            className="btn-gold block w-full text-center text-sm sm:text-base py-3.5 sm:py-4"
+            className="btn-gold block w-full text-center text-base py-4"
           >
             {t('home.getStarted')}
           </Link>
@@ -104,7 +104,7 @@ export function HomePage() {
         {/* Secondary action */}
         <Link
           to="/gallery"
-          className="mt-4 sm:mt-5 text-gold-400/80 hover:text-gold-300 text-sm sm:text-base font-display uppercase tracking-widest transition-colors opacity-0-initial animate-reveal-fade delay-500 flex items-center gap-2"
+          className="mt-4 sm:mt-5 text-gold-400/80 hover:text-gold-300 text-base font-display uppercase tracking-widest transition-colors opacity-0-initial animate-reveal-fade delay-500 flex items-center gap-2"
         >
           {t('home.viewGallery')}
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

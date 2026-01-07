@@ -55,10 +55,10 @@ export function ArtifactDetailPage() {
           <h1 className="text-xl sm:text-2xl text-obsidian-100 mb-2">
             {t('artifact.notFound') || 'Artifact not found'}
           </h1>
-          <p className="text-sm text-obsidian-400 text-center mb-8 max-w-xs">
+          <p className="text-base text-obsidian-400 text-center mb-8 max-w-xs">
             {t('artifact.notFoundDesc') || 'This artifact may have been deleted or moved.'}
           </p>
-          <Link to="/gallery" className="btn-gold text-sm">
+          <Link to="/gallery" className="btn-gold text-base">
             {t('nav.gallery')}
           </Link>
         </div>
@@ -88,7 +88,7 @@ export function ArtifactDetailPage() {
               onClick={() => setActiveTab(tab.id)}
               className={`
                 relative flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg
-                font-display text-xs tracking-wider uppercase transition-all duration-300
+                font-display text-sm tracking-wider uppercase transition-all duration-300
                 ${activeTab === tab.id
                   ? 'text-obsidian-950'
                   : 'text-obsidian-400 hover:text-obsidian-200'
@@ -102,7 +102,7 @@ export function ArtifactDetailPage() {
                 {tab.icon}
                 {tab.label}
                 {tab.id === 'colors' && variants.length > 0 && (
-                  <span className={`px-1.5 py-0.5 text-[10px] rounded-full ${
+                  <span className={`px-1.5 py-0.5 text-sm rounded-full ${
                     activeTab === tab.id
                       ? 'bg-obsidian-950/20 text-obsidian-900'
                       : 'bg-obsidian-700 text-obsidian-300'
