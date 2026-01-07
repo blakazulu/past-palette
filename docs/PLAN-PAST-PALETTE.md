@@ -588,12 +588,12 @@ interface ColorVariantGalleryProps {
 - [x] Create API client wrapper (colorize endpoint + base64 utils)
 - [x] Create TypeScript types (artifact.ts)
 
-### Phase 3: Layout & Navigation
-- [ ] Create Layout component with Header and BottomNav
-- [ ] Set up React Router with all routes
-- [ ] Build HomePage with app introduction
-- [ ] Create SettingsPage
-- [ ] Add offline indicator
+### Phase 3: Layout & Navigation ✅
+- [x] Create Layout component with Header and BottomNav
+- [x] Set up React Router with all routes (/, /capture, /gallery, /artifact/:id, /settings)
+- [x] Build HomePage with app introduction and color scheme preview
+- [x] Create SettingsPage with language toggle, color scheme, restoration, haptics
+- [x] Create placeholder pages for Capture, Gallery, ArtifactDetail
 
 ### Phase 4: Camera & Upload
 - [ ] Build CameraView with stream display
@@ -740,3 +740,12 @@ GOOGLE_AI_API_KEY=your_gemini_api_key
 - API client with colorize endpoint wrapper and base64 utilities
 - TypeScript types for all domain entities
 - App.tsx updated with language toggle demo
+
+### 2026-01-07: Phase 3 Complete
+- React Router v7 with nested routes under Layout
+- Layout component with sticky Header and fixed BottomNav
+- BottomNav with SVG icons and active state highlighting
+- HomePage with hero section, CTA buttons, color scheme preview
+- SettingsPage with language toggle, default scheme selector, toggles
+- Placeholder pages for Capture, Gallery, ArtifactDetail
+- Safe area CSS utility for mobile bottom inset

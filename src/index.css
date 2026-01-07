@@ -112,6 +112,11 @@ body {
   outline-offset: 2px;
 }
 
+/* Safe area utilities for mobile */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 /* Custom scrollbar for desktop */
 @media (min-width: 768px) {
   ::-webkit-scrollbar {
