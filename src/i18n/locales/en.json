@@ -27,20 +27,39 @@
     "usePhoto": "Use Photo"
   },
   "colorization": {
-    "title": "Choose Color Scheme",
+    "title": "Colorize Artifact",
+    "selectScheme": "Select Color Scheme",
     "colorize": "Colorize",
+    "colorizeAnother": "Create Another Variant",
     "processing": "Processing...",
-    "preparing": "Preparing image...",
-    "colorizing": "Applying colors...",
-    "saving": "Saving result...",
-    "complete": "Complete!",
-    "error": "Error occurred",
+    "statusPreparing": "Preparing image...",
+    "statusColorizing": "Applying colors with AI...",
+    "statusSaving": "Saving result...",
+    "statusComplete": "Colorization complete!",
+    "statusError": "Colorization failed",
     "retry": "Retry",
     "addVariant": "Add Another Variant",
     "includeRestoration": "Include Restoration",
     "restorationHint": "Also repair cracks and damage",
-    "customPrompt": "Custom Instructions",
-    "customPromptPlaceholder": "Describe the colors you want..."
+    "customPromptLabel": "Custom Instructions",
+    "customPromptPlaceholder": "Describe the colors you want to apply...",
+    "speculativeNotice": "AI colorization is speculative and based on historical research"
+  },
+  "colorSchemes": {
+    "roman": "Roman",
+    "romanDesc": "Ancient Roman empire colors",
+    "greek": "Greek",
+    "greekDesc": "Classical Greek pottery style",
+    "egyptian": "Egyptian",
+    "egyptianDesc": "Ancient Egyptian sacred colors",
+    "mesopotamian": "Mesopotamian",
+    "mesopotamianDesc": "Babylonian and Assyrian colors",
+    "weathered": "Weathered",
+    "weatheredDesc": "Aged with natural patina",
+    "original": "Original",
+    "originalDesc": "AI-detected original colors",
+    "custom": "Custom",
+    "customDesc": "Your own color instructions"
   },
   "schemes": {
     "roman": "Roman",
@@ -75,13 +94,15 @@
   "artifact": {
     "colors": "Colors",
     "original": "Original",
+    "colorized": "Colorized",
+    "compare": "Compare",
+    "untitled": "Untitled Artifact",
     "variants": "Color Variants",
     "noVariants": "No color variants yet",
     "noVariantsHint": "Choose a color scheme to create your first variant",
     "speculativeNote": "AI colorization is speculative and based on historical research",
     "download": "Download",
     "share": "Share",
-    "compare": "Compare",
     "before": "Before",
     "after": "After"
   },
@@ -115,5 +136,13 @@
     "colorizationFailed": "Colorization failed",
     "networkError": "Network error. Please check your connection.",
     "unknownError": "An unexpected error occurred"
+  },
+  "pwa": {
+    "installTitle": "Install Past Palette",
+    "installDescription": "Add to your home screen for the best experience",
+    "install": "Install",
+    "notNow": "Not now",
+    "offline": "You are offline",
+    "backOnline": "Back online"
   }
 }

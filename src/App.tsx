@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSettingsStore } from '@/stores/appStore';
 import { Layout } from '@/components/layout';
+import { ErrorBoundary } from '@/components/ui';
 import {
   HomePage,
   CapturePage,
@@ -23,17 +24,19 @@ function App() {
   }, [language, i18n]);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="capture" element={<CapturePage />} />
-          <Route path="gallery" element={<GalleryPage />} />
-          <Route path="artifact/:id" element={<ArtifactDetailPage />} />
-          <Route path="settings" element={<SettingsPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="capture" element={<CapturePage />} />
+            <Route path="gallery" element={<GalleryPage />} />
+            <Route path="artifact/:id" element={<ArtifactDetailPage />} />
+            <Route path="settings" element={<SettingsPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 

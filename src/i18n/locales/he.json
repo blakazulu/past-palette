@@ -27,20 +27,39 @@
     "usePhoto": "השתמשו בתמונה"
   },
   "colorization": {
-    "title": "בחרו סכמת צבעים",
+    "title": "צביעת ממצא",
+    "selectScheme": "בחרו סכמת צבעים",
     "colorize": "צבעו",
+    "colorizeAnother": "צרו גרסה נוספת",
     "processing": "מעבד...",
-    "preparing": "מכין תמונה...",
-    "colorizing": "מחיל צבעים...",
-    "saving": "שומר תוצאה...",
-    "complete": "הושלם!",
-    "error": "אירעה שגיאה",
+    "statusPreparing": "מכין תמונה...",
+    "statusColorizing": "מחיל צבעים עם AI...",
+    "statusSaving": "שומר תוצאה...",
+    "statusComplete": "הצביעה הושלמה!",
+    "statusError": "הצביעה נכשלה",
     "retry": "נסו שוב",
     "addVariant": "הוסיפו גרסה נוספת",
     "includeRestoration": "כללו שחזור",
     "restorationHint": "תקנו גם סדקים ונזקים",
-    "customPrompt": "הוראות מותאמות אישית",
-    "customPromptPlaceholder": "תארו את הצבעים שאתם רוצים..."
+    "customPromptLabel": "הוראות מותאמות אישית",
+    "customPromptPlaceholder": "תארו את הצבעים שאתם רוצים להחיל...",
+    "speculativeNotice": "צביעת AI היא ספקולטיבית ומבוססת על מחקר היסטורי"
+  },
+  "colorSchemes": {
+    "roman": "רומי",
+    "romanDesc": "צבעי האימפריה הרומית",
+    "greek": "יווני",
+    "greekDesc": "סגנון קדרות יוונית קלאסית",
+    "egyptian": "מצרי",
+    "egyptianDesc": "צבעים קדושים מצריים",
+    "mesopotamian": "מסופוטמי",
+    "mesopotamianDesc": "צבעים בבליים ואשוריים",
+    "weathered": "בלוי",
+    "weatheredDesc": "מראה מיושן עם פטינה",
+    "original": "מקורי",
+    "originalDesc": "צבעים מקוריים שזוהו ע\"י AI",
+    "custom": "מותאם אישית",
+    "customDesc": "הוראות צביעה משלכם"
   },
   "schemes": {
     "roman": "רומי",
@@ -75,13 +94,15 @@
   "artifact": {
     "colors": "צבעים",
     "original": "מקור",
+    "colorized": "צבוע",
+    "compare": "השוואה",
+    "untitled": "ממצא ללא שם",
     "variants": "גרסאות צבע",
     "noVariants": "אין עדיין גרסאות צבע",
     "noVariantsHint": "בחרו סכמת צבעים ליצירת הגרסה הראשונה",
     "speculativeNote": "צביעת AI היא ספקולטיבית ומבוססת על מחקר היסטורי",
     "download": "הורדה",
     "share": "שיתוף",
-    "compare": "השוואה",
     "before": "לפני",
     "after": "אחרי"
   },
@@ -115,5 +136,13 @@
     "colorizationFailed": "הצביעה נכשלה",
     "networkError": "שגיאת רשת. בדקו את החיבור.",
     "unknownError": "אירעה שגיאה בלתי צפויה"
+  },
+  "pwa": {
+    "installTitle": "התקינו את פלטת העבר",
+    "installDescription": "הוסיפו למסך הבית לחוויה הטובה ביותר",
+    "install": "התקנה",
+    "notNow": "לא עכשיו",
+    "offline": "אתם במצב לא מקוון",
+    "backOnline": "חזרתם לרשת"
   }
 }
