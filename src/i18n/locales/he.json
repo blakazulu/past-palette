@@ -73,6 +73,14 @@
     "custom": "מותאם אישית",
     "customDesc": "הוראות צביעה משלכם"
   },
+  "publicGallery": {
+    "title": "גלריה ציבורית",
+    "subtitle_one": "ממצא צבוע {{count}} מהקהילה",
+    "subtitle_other": "{{count}} ממצאים צבועים מהקהילה",
+    "enterTour": "כניסה לגלריה הווירטואלית",
+    "empty": "אין עדיין ממצאים. היו הראשונים לשתף!",
+    "variants": "גרסאות"
+  },
   "gallery": {
     "title": "הממצאים שלי",
     "subtitle_one": "ממצא {{count}} באוסף שלכם",

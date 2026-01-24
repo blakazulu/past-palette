@@ -11,6 +11,7 @@ import {
   GalleryPage,
   ArtifactDetailPage,
   SettingsPage,
+  PublicGalleryPage,
 } from '@/pages';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="capture" element={<CapturePage />} />
             <Route path="gallery" element={<GalleryPage />} />
+            <Route path="public-gallery" element={<PublicGalleryPage />} />
             <Route path="artifact/:id" element={<ArtifactDetailPage />} />
             <Route path="settings" element={<SettingsPage />} />
           </Route>

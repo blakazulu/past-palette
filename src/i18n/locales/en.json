@@ -73,6 +73,14 @@
     "custom": "Custom",
     "customDesc": "Your own color instructions"
   },
+  "publicGallery": {
+    "title": "Public Gallery",
+    "subtitle_one": "{{count}} colorized artifact from the community",
+    "subtitle_other": "{{count}} colorized artifacts from the community",
+    "enterTour": "Enter Virtual Gallery",
+    "empty": "No artifacts yet. Be the first to share!",
+    "variants": "variants"
+  },
   "gallery": {
     "title": "My Artifacts",
     "subtitle_one": "{{count}} artifact in your collection",
