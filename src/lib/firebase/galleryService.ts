@@ -156,6 +156,17 @@ export async function uploadToGallery(artifactId: string): Promise<string> {
 }
 
 /**
+ * Convert Firebase Storage URL to proxied URL to avoid CORS issues
+ */
+function proxyImageUrl(url: string): string {
+  // Only proxy Firebase Storage URLs
+  if (url.includes('firebasestorage.googleapis.com') || url.includes('firebasestorage.app')) {
+    return `/.netlify/functions/image-proxy?url=${encodeURIComponent(url)}`;
+  }
+  return url;
+}
+
+/**
  * Fetch the latest gallery artifacts
  */
 export async function fetchGalleryArtifacts(count = 30): Promise<GalleryArtifact[]> {
@@ -167,5 +178,16 @@ export async function fetchGalleryArtifacts(count = 30): Promise<GalleryArtifact
   );
 
   const snapshot = await getDocs(q);
-  return snapshot.docs.map((doc) => doc.data() as GalleryArtifact);
+  const artifacts = snapshot.docs.map((doc) => doc.data() as GalleryArtifact);
+
+  // Proxy all image URLs to avoid CORS issues
+  return artifacts.map((artifact) => ({
+    ...artifact,
+    originalImageUrl: proxyImageUrl(artifact.originalImageUrl),
+    thumbnailUrl: proxyImageUrl(artifact.thumbnailUrl),
+    variants: artifact.variants.map((variant) => ({
+      ...variant,
+      imageUrl: proxyImageUrl(variant.imageUrl),
+    })),
+  }));
 }

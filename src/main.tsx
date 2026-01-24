@@ -10,17 +10,27 @@ const VERSION_STORAGE_KEY = 'past-palette-app-version';
 
 async function checkVersionAndClearCacheIfNeeded(): Promise<boolean> {
   try {
-    // Fetch version.json with cache-busting query param
+    // Fetch version.json with cache-busting query param and timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
+
     const response = await fetch(`/version.json?t=${Date.now()}`, {
       cache: 'no-store',
+      signal: controller.signal,
     });
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       console.warn('[Version Check] Failed to fetch version.json:', response.status);
       return false;
     }
 
-    const { version: serverVersion } = await response.json();
+    const data = await response.json();
+    if (!data || typeof data.version !== 'string') {
+      console.warn('[Version Check] Invalid version.json structure');
+      return false;
+    }
+    const serverVersion = data.version;
     const storedVersion = localStorage.getItem(VERSION_STORAGE_KEY);
 
     console.log(`[Version Check] Server: ${serverVersion}, Local: ${storedVersion ?? 'none'}`);

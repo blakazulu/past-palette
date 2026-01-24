@@ -5,6 +5,9 @@ node_modules
 dist
 dist-ssr
 
+# Generated version file (created at build time)
+public/version.json
+
 # Local env files
 .env
 .env.local
