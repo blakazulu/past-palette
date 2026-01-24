@@ -118,28 +118,37 @@ export async function uploadToGallery(artifactId: string): Promise<string> {
       await uploadBytes(variantRef, variant.blob);
       const imageUrl = await getDownloadURL(variantRef);
 
-      return {
+      const variantData: Record<string, unknown> = {
         id: variant.id,
         imageUrl,
         colorScheme: variant.colorScheme,
-        prompt: variant.prompt || undefined,
       };
+      if (variant.prompt) {
+        variantData.prompt = variant.prompt;
+      }
+      return variantData;
     })
   );
 
-  // Create Firestore document
-  const galleryDoc: Omit<GalleryArtifact, 'createdAt'> & { createdAt: ReturnType<typeof serverTimestamp> } = {
+  // Create Firestore document (filter out undefined values)
+  const galleryDoc: Record<string, unknown> = {
     id: artifactId,
     deviceId: getDeviceId(),
     name: artifact.metadata.name || 'Unnamed Artifact',
-    siteName: artifact.metadata.siteName,
-    discoveryLocation: artifact.metadata.discoveryLocation,
     originalImageUrl,
     thumbnailUrl,
     variants: uploadedVariants,
     createdAt: serverTimestamp(),
     status: 'published',
   };
+
+  // Only add optional fields if they have values
+  if (artifact.metadata.siteName) {
+    galleryDoc.siteName = artifact.metadata.siteName;
+  }
+  if (artifact.metadata.discoveryLocation) {
+    galleryDoc.discoveryLocation = artifact.metadata.discoveryLocation;
+  }
 
   await setDoc(doc(firestore, GALLERY_COLLECTION, artifactId), galleryDoc);
 
