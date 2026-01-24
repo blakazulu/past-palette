@@ -3,8 +3,8 @@ import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 
 // CC0 textures from Poly Haven
-const FLOOR_TEXTURE_URL = 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_floor_deck/wood_floor_deck_diff_2k.jpg';
-const WALL_TEXTURE_URL = 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/white_plaster_02/white_plaster_02_diff_1k.jpg';
+const FLOOR_TEXTURE_URL = 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/diagonal_parquet/diagonal_parquet_diff_2k.jpg';
+const WALL_TEXTURE_URL = 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/plaster_brick_pattern/plaster_brick_pattern_diff_2k.jpg';
 const CEILING_TEXTURE_URL = 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/marble_01/marble_01_diff_2k.jpg';
 
 const ROOM_WIDTH = 32;
@@ -20,24 +20,28 @@ export function GalleryRoom() {
   const wallTexture = useTexture(WALL_TEXTURE_URL);
   const ceilingTexture = useTexture(CEILING_TEXTURE_URL);
 
-  // Configure floor texture for repeating
+  // Configure floor texture for repeating (room is 32x28 units)
   useEffect(() => {
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-    floorTexture.repeat.set(16, 14);
+    floorTexture.repeat.set(ROOM_WIDTH / 2, ROOM_DEPTH / 2);
     floorTexture.colorSpace = THREE.SRGBColorSpace;
+    floorTexture.needsUpdate = true;
   }, [floorTexture]);
 
   // Configure wall texture for repeating
   useEffect(() => {
     wallTexture.wrapS = wallTexture.wrapT = THREE.RepeatWrapping;
+    wallTexture.repeat.set(16, 4);
     wallTexture.colorSpace = THREE.SRGBColorSpace;
+    wallTexture.needsUpdate = true;
   }, [wallTexture]);
 
   // Configure ceiling texture for repeating
   useEffect(() => {
     ceilingTexture.wrapS = ceilingTexture.wrapT = THREE.RepeatWrapping;
-    ceilingTexture.repeat.set(8, 7);
+    ceilingTexture.repeat.set(ROOM_WIDTH / 4, ROOM_DEPTH / 4);
     ceilingTexture.colorSpace = THREE.SRGBColorSpace;
+    ceilingTexture.needsUpdate = true;
   }, [ceilingTexture]);
 
   const floorMaterial = useMemo(
