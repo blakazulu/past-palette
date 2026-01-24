@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSettingsStore } from '@/stores/appStore';
 import { Layout } from '@/components/layout';
 import { ErrorBoundary } from '@/components/ui';
+import { initializeUploadQueue } from '@/lib/firebase/uploadQueue';
 import {
   HomePage,
   CapturePage,
@@ -15,6 +16,11 @@ import {
 function App() {
   const { i18n } = useTranslation();
   const { language } = useSettingsStore();
+
+  // Initialize upload queue on mount
+  useEffect(() => {
+    initializeUploadQueue();
+  }, []);
 
   // Sync language with settings store on mount
   useEffect(() => {
