@@ -175,11 +175,50 @@ export async function retryFailedUploadsOnStartup(): Promise<void> {
 }
 
 /**
+ * Check for existing artifacts with color variants that haven't been uploaded
+ * and enqueue them for upload
+ */
+export async function enqueueExistingArtifacts(): Promise<void> {
+  try {
+    // Get all artifacts that have color variants
+    const allArtifacts = await db.artifacts.toArray();
+
+    for (const artifact of allArtifacts) {
+      // Check if artifact has color variants
+      const variants = await db.colorVariants
+        .where('artifactId')
+        .equals(artifact.id)
+        .count();
+
+      if (variants === 0) continue;
+
+      // Check if already in upload queue (pending, uploading, or completed successfully)
+      const existingUpload = await db.pendingUploads
+        .where('artifactId')
+        .equals(artifact.id)
+        .first();
+
+      if (!existingUpload) {
+        // Not in queue - add it
+        console.log(`[Gallery Upload] Found existing artifact ${artifact.id} with ${variants} variants - enqueuing`);
+        await enqueueUpload(artifact.id);
+      }
+    }
+  } catch (error) {
+    console.error('[Gallery Upload] Error checking existing artifacts:', error);
+  }
+}
+
+/**
  * Initialize the upload queue system
  */
 export function initializeUploadQueue(): void {
   // Process queue on startup
   retryFailedUploadsOnStartup();
+
+  // Enqueue any existing artifacts that haven't been uploaded
+  enqueueExistingArtifacts();
+
   processQueue();
 
   // Process queue when coming online

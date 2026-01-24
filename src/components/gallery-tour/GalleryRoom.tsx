@@ -2,10 +2,10 @@ import { useMemo, useEffect } from 'react';
 import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 
-// CC0 textures from Poly Haven
-const FLOOR_TEXTURE_URL = 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/diagonal_parquet/diagonal_parquet_diff_2k.jpg';
-const WALL_TEXTURE_URL = 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/plaster_brick_pattern/plaster_brick_pattern_diff_2k.jpg';
-const CEILING_TEXTURE_URL = 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/marble_01/marble_01_diff_2k.jpg';
+// Local optimized textures (CC0 from Poly Haven)
+const FLOOR_TEXTURE_URL = '/textures/wood_floor_deck_diff_2k.jpg';
+const WALL_TEXTURE_URL = '/textures/white_plaster_02_diff_1k.jpg';
+const CEILING_TEXTURE_URL = '/textures/marble_01_diff_2k.jpg';
 
 const ROOM_WIDTH = 32;
 const ROOM_DEPTH = 28;
