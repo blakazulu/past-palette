@@ -1,10 +1,12 @@
 import Dexie, { Table } from 'dexie';
 import type { Artifact, ArtifactImage, ColorVariant } from '@/types/artifact';
+import type { PendingUpload } from '@/types/gallery';
 
 export class PastPaletteDB extends Dexie {
   artifacts!: Table<Artifact>;
   images!: Table<ArtifactImage>;
   colorVariants!: Table<ColorVariant>;
+  pendingUploads!: Table<PendingUpload>;
 
   constructor() {
     super('PastPaletteDB');
@@ -12,6 +14,12 @@ export class PastPaletteDB extends Dexie {
       artifacts: 'id, createdAt, updatedAt, status',
       images: 'id, artifactId, createdAt',
       colorVariants: 'id, artifactId, colorScheme, createdAt',
+    });
+    this.version(2).stores({
+      artifacts: 'id, createdAt, updatedAt, status',
+      images: 'id, artifactId, createdAt',
+      colorVariants: 'id, artifactId, colorScheme, createdAt',
+      pendingUploads: 'id, artifactId, status, createdAt',
     });
   }
 }
