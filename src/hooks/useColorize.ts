@@ -2,6 +2,7 @@ import { useState, useCallback, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 import { db } from '@/lib/db';
 import { colorizeImage, blobToBase64, base64ToBlob } from '@/lib/api/client';
+import { enqueueUpload } from '@/lib/firebase/uploadQueue';
 import type { ColorScheme, ColorVariant } from '@/types/artifact';
 import type { ColorizationStep } from '@/components/colorization/ColorizationProgress';
 
@@ -135,6 +136,11 @@ export function useColorize(): UseColorizeReturn {
           if (artifact.status === 'images-captured') {
             artifact.status = 'complete';
           }
+        });
+
+        // Queue for gallery upload (fire-and-forget)
+        enqueueUpload(artifactId).catch((err) => {
+          console.error('[Gallery Upload] Failed to enqueue:', err);
         });
 
         setProgress(100);
