@@ -42,7 +42,7 @@ export function PublicGalleryPage() {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] text-center px-4">
-        <p className="text-red-400 mb-4">{error}</p>
+        <p className="text-red-300 text-carved mb-4">{error}</p>
         <button
           type="button"
           onClick={() => window.location.reload()}
@@ -76,8 +76,7 @@ export function PublicGalleryPage() {
         <button
           type="button"
           onClick={handleEnterTour}
-          disabled={artifacts.length === 0}
-          className="px-6 py-3 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 disabled:from-obsidian-700 disabled:to-obsidian-600 disabled:text-obsidian-400 text-obsidian-950 font-semibold rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-gold-600/20"
+          className="px-6 py-3 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-obsidian-950 font-semibold rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-gold-600/20"
         >
           <CubeIcon className="w-5 h-5" />
           {t('publicGallery.enterTour')}
@@ -90,7 +89,7 @@ export function PublicGalleryPage() {
           <div className="w-16 h-16 rounded-full glass-panel flex items-center justify-center mb-4">
             <GalleryIcon className="w-8 h-8 text-obsidian-400" />
           </div>
-          <p className="text-obsidian-400 font-display tracking-wide">
+          <p className="text-obsidian-200 text-carved font-display tracking-wide">
             {t('publicGallery.empty')}
           </p>
         </div>

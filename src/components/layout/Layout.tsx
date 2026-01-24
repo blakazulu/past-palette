@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
 import { BottomNav } from './BottomNav';
-import { InstallPrompt, OfflineIndicator } from '@/components/ui';
+import { InstallPrompt, OfflineIndicator, UploadProgress } from '@/components/ui';
 import { useAppStore } from '@/stores/appStore';
 
 export function Layout() {
@@ -44,6 +44,7 @@ export function Layout() {
       </main>
       <BottomNav />
       <InstallPrompt />
+      <UploadProgress />
     </div>
   );
 }

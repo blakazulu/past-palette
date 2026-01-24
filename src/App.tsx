@@ -12,6 +12,7 @@ import {
   ArtifactDetailPage,
   SettingsPage,
   PublicGalleryPage,
+  GalleryTourPage,
 } from '@/pages';
 
 function App() {
@@ -42,6 +43,8 @@ function App() {
             <Route path="artifact/:id" element={<ArtifactDetailPage />} />
             <Route path="settings" element={<SettingsPage />} />
           </Route>
+          {/* Fullscreen page outside Layout */}
+          <Route path="gallery-tour" element={<GalleryTourPage />} />
         </Routes>
       </BrowserRouter>
     </ErrorBoundary>

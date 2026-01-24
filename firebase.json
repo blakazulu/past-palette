@@ -1,0 +1,12 @@
+{
+  "firestore": {
+    "database": "(default)",
+    "location": "nam5",
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules",
+    "bucket": "past-palette-3c4ea.firebasestorage.app"
+  }
+}

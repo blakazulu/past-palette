@@ -7,6 +7,7 @@
     "home": "בית",
     "capture": "צילום",
     "gallery": "גלריה",
+    "publicGallery": "עולם",
     "settings": "הגדרות"
   },
   "home": {
@@ -85,6 +86,7 @@
     "title": "הממצאים שלי",
     "subtitle_one": "ממצא {{count}} באוסף שלכם",
     "subtitle_other": "{{count}} ממצאים באוסף שלכם",
+    "emptyTitle": "האוסף שלכם מחכה",
     "empty": "אין ממצאים עדיין",
     "emptyHint": "צלמו את הממצא הראשון שלכם כדי להתחיל",
     "search": "חיפוש ממצאים...",
@@ -164,5 +166,25 @@
     "title": "משהו השתבש",
     "description": "אירעה שגיאה בלתי צפויה. אנא נסו לרענן את הדף.",
     "refresh": "רענן דף"
+  },
+  "galleryTour": {
+    "welcome": "ברוכים הבאים לגלריה",
+    "mobileMove": "השתמשו בצד שמאל לתנועה",
+    "mobileLook": "גררו בצד ימין להסתכל",
+    "mobileTap": "הקישו על יצירה לפרטים",
+    "desktopMove": "WASD או חצים לתנועה",
+    "desktopLook": "עכבר להסתכל",
+    "desktopSprint": "החזיקו Shift לריצה",
+    "desktopClick": "לחצו להפעלת הפקדים",
+    "enter": "כניסה לגלריה",
+    "noWebGL": "הדפדפן שלך לא תומך בגרפיקה תלת מימדית.",
+    "viewGrid": "צפייה בגלריה",
+    "artworks": "יצירות",
+    "loadingArtworks": "טוען יצירות..."
+  },
+  "upload": {
+    "uploading": "מעלה לגלריה...",
+    "success": "הועלה לגלריה!",
+    "error": "ההעלאה נכשלה"
   }
 }

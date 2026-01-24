@@ -7,6 +7,7 @@
     "home": "Home",
     "capture": "Capture",
     "gallery": "Gallery",
+    "publicGallery": "World",
     "settings": "Settings"
   },
   "home": {
@@ -85,6 +86,7 @@
     "title": "My Artifacts",
     "subtitle_one": "{{count}} artifact in your collection",
     "subtitle_other": "{{count}} artifacts in your collection",
+    "emptyTitle": "Your Collection Awaits",
     "empty": "No artifacts yet",
     "emptyHint": "Capture your first artifact to get started",
     "search": "Search artifacts...",
@@ -164,5 +166,25 @@
     "title": "Something went wrong",
     "description": "An unexpected error occurred. Please try refreshing the page.",
     "refresh": "Refresh Page"
+  },
+  "galleryTour": {
+    "welcome": "Welcome to the Gallery",
+    "mobileMove": "Use left side to move",
+    "mobileLook": "Drag right side to look around",
+    "mobileTap": "Tap artwork to see details",
+    "desktopMove": "WASD or Arrow keys to move",
+    "desktopLook": "Mouse to look around",
+    "desktopSprint": "Hold Shift to sprint",
+    "desktopClick": "Click to enable controls",
+    "enter": "Enter Gallery",
+    "noWebGL": "Your browser does not support 3D graphics.",
+    "viewGrid": "View Grid Gallery",
+    "artworks": "artworks",
+    "loadingArtworks": "Loading artworks..."
+  },
+  "upload": {
+    "uploading": "Uploading to gallery...",
+    "success": "Uploaded to gallery!",
+    "error": "Upload failed"
   }
 }

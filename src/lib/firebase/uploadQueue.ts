@@ -1,6 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import { db } from '@/lib/db';
 import { uploadToGallery } from './galleryService';
+import { useUploadStore } from '@/stores/uploadStore';
 import type { PendingUpload } from '@/types/gallery';
 
 const RETRY_DELAYS = [0, 5000, 15000, 45000, 120000]; // ms
@@ -79,7 +80,14 @@ async function processUpload(upload: PendingUpload): Promise<void> {
     }
   }
 
+  const { setCurrentUpload } = useUploadStore.getState();
+
   console.log(`[Gallery Upload] Starting upload for ${upload.artifactId} (attempt ${upload.attempts + 1})`);
+
+  setCurrentUpload({
+    artifactId: upload.artifactId,
+    status: 'uploading',
+  });
 
   await db.pendingUploads.update(upload.id, {
     status: 'uploading',
@@ -92,6 +100,11 @@ async function processUpload(upload: PendingUpload): Promise<void> {
     // Success - remove from queue
     await db.pendingUploads.delete(upload.id);
     console.log(`[Gallery Upload] Successfully uploaded ${upload.artifactId}`);
+
+    setCurrentUpload({
+      artifactId: upload.artifactId,
+      status: 'success',
+    });
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     const newAttempts = upload.attempts + 1;
@@ -105,12 +118,20 @@ async function processUpload(upload: PendingUpload): Promise<void> {
         error: errorMessage,
       });
       console.log(`[Gallery Upload] Marked ${upload.artifactId} as failed after ${MAX_ATTEMPTS} attempts`);
+
+      setCurrentUpload({
+        artifactId: upload.artifactId,
+        status: 'error',
+        error: errorMessage,
+      });
     } else {
       await db.pendingUploads.update(upload.id, {
         status: 'pending',
         attempts: newAttempts,
         error: errorMessage,
       });
+      // Clear the uploading status so user isn't confused during retry delay
+      setCurrentUpload(null);
     }
   }
 }
