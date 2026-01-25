@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback, Suspense } from 'react';
+import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Canvas } from '@react-three/fiber';
 import { useProgress, Html } from '@react-three/drei';
@@ -8,7 +8,6 @@ import {
   ArtworkFrame,
   FirstPersonControls,
   TouchControls,
-  ArtworkInfoOverlay,
 } from '@/components/gallery-tour';
 import {
   GalleryColumns,
@@ -79,12 +78,7 @@ export function GalleryTourPage() {
   const [artifacts, setArtifacts] = useState<GalleryArtifact[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [nearbyArtifact, setNearbyArtifact] = useState<GalleryArtifact | null>(null);
-  const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [showInstructions, setShowInstructions] = useState(true);
-
-  // Track variant index per artifact for when user switches variants
-  const [artifactVariantMap, setArtifactVariantMap] = useState<Record<string, number>>({});
 
   const isMobile = useMemo(() => /iPhone|iPad|iPod|Android/i.test(navigator.userAgent), []);
 
@@ -116,22 +110,6 @@ export function GalleryTourPage() {
 
     loadArtifacts();
   }, []);
-
-  const handleFrameClick = useCallback((artifact: GalleryArtifact) => {
-    setNearbyArtifact(artifact);
-    // Get the current variant index for this artifact, or default to 0
-    setSelectedVariantIndex(artifactVariantMap[artifact.id] ?? 0);
-  }, [artifactVariantMap]);
-
-  const handleVariantChange = useCallback((index: number) => {
-    setSelectedVariantIndex(index);
-    if (nearbyArtifact) {
-      setArtifactVariantMap((prev) => ({
-        ...prev,
-        [nearbyArtifact.id]: index,
-      }));
-    }
-  }, [nearbyArtifact]);
 
   const handleExit = () => {
     document.exitPointerLock();
@@ -223,22 +201,14 @@ export function GalleryTourPage() {
           <ColumnVines />
 
           {/* Render all frame positions - with or without artifacts */}
-          {FRAME_POSITIONS.map((framePos, index) => {
-            const artifact = artifacts[index] || null;
-            const isSelected = artifact && nearbyArtifact?.id === artifact.id;
-
-            return (
-              <ArtworkFrame
-                key={`frame-${index}`}
-                artifact={artifact}
-                position={framePos.position}
-                rotation={framePos.rotation}
-                isNearby={!!isSelected}
-                variantIndex={isSelected ? selectedVariantIndex : (artifact ? (artifactVariantMap[artifact.id] ?? 0) : 0)}
-                onClick={artifact ? () => handleFrameClick(artifact) : undefined}
-              />
-            );
-          })}
+          {FRAME_POSITIONS.map((framePos, index) => (
+            <ArtworkFrame
+              key={`frame-${index}`}
+              artifact={artifacts[index] || null}
+              position={framePos.position}
+              rotation={framePos.rotation}
+            />
+          ))}
 
           {isMobile ? (
             <TouchControls enabled={!showInstructions} />
@@ -260,14 +230,14 @@ export function GalleryTourPage() {
                 <>
                   <p>{t('galleryTour.mobileMove', 'Use left side to move')}</p>
                   <p>{t('galleryTour.mobileLook', 'Drag right side to look around')}</p>
-                  <p>{t('galleryTour.mobileTap', 'Tap artwork to see details')}</p>
+                  <p>{t('galleryTour.mobileTap', 'Tap artwork to cycle color variants')}</p>
                 </>
               ) : (
                 <>
                   <p>{t('galleryTour.desktopMove', 'WASD or Arrow keys to move')}</p>
                   <p>{t('galleryTour.desktopLook', 'Mouse to look around')}</p>
                   <p>{t('galleryTour.desktopSprint', 'Hold Shift to sprint')}</p>
-                  <p>{t('galleryTour.desktopClick', 'Click to enable controls')}</p>
+                  <p>{t('galleryTour.desktopClick', 'Click artwork to cycle variants')}</p>
                 </>
               )}
             </div>
@@ -281,16 +251,6 @@ export function GalleryTourPage() {
             </button>
           </div>
         </div>
-      )}
-
-      {/* Artwork info overlay */}
-      {!showInstructions && (
-        <ArtworkInfoOverlay
-          artifact={nearbyArtifact}
-          currentVariantIndex={selectedVariantIndex}
-          onChangeVariant={handleVariantChange}
-          onClose={() => setNearbyArtifact(null)}
-        />
       )}
 
       {/* Exit button */}

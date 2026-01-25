@@ -1,5 +1,5 @@
-import { useRef, useMemo, useEffect, Suspense } from 'react';
-import { useTexture } from '@react-three/drei';
+import { useRef, useMemo, useEffect, useState, useCallback, Suspense } from 'react';
+import { useTexture, Text } from '@react-three/drei';
 import * as THREE from 'three';
 import type { GalleryArtifact } from '@/types/gallery';
 
@@ -7,9 +7,6 @@ interface ArtworkFrameProps {
   artifact?: GalleryArtifact | null;
   position: [number, number, number];
   rotation: [number, number, number];
-  isNearby: boolean;
-  variantIndex?: number;
-  onClick?: () => void;
 }
 
 const FRAME_WIDTH = 1.2;
@@ -53,30 +50,43 @@ export function ArtworkFrame({
   artifact,
   position,
   rotation,
-  isNearby,
-  variantIndex = 0,
-  onClick,
 }: ArtworkFrameProps) {
   const groupRef = useRef<THREE.Group>(null);
 
-  // Get the current variant's image URL (only if artifact exists)
-  const imageUrl = artifact?.variants[variantIndex]?.imageUrl ?? artifact?.variants[0]?.imageUrl;
+  // Track current display index: 0 = original, 1+ = variants
+  const [displayIndex, setDisplayIndex] = useState(0);
+
+  // Build array of all images: [original, ...variants]
+  const allImages = useMemo(() => {
+    if (!artifact) return [];
+    const images: { url: string; label: string }[] = [
+      { url: artifact.originalImageUrl, label: 'Original' },
+    ];
+    artifact.variants.forEach((v) => {
+      images.push({ url: v.imageUrl, label: v.colorScheme });
+    });
+    return images;
+  }, [artifact]);
+
+  // Get current image URL
+  const currentImage = allImages[displayIndex] || allImages[0];
+  const imageUrl = currentImage?.url;
+
+  // Click handler to cycle through images
+  const handleClick = useCallback(() => {
+    if (allImages.length > 1) {
+      setDisplayIndex((prev) => (prev + 1) % allImages.length);
+    }
+  }, [allImages.length]);
 
   // Memoize frame material to prevent recreation on every render
   const frameMaterial = useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: '#8B4513', // Base wood color
+      color: '#8B4513', // Wood color
       roughness: 0.3,
       metalness: 0.1,
     });
   }, []);
-
-  // Update frame material properties when isNearby changes
-  useEffect(() => {
-    frameMaterial.color.set(isNearby ? '#D4AF37' : '#8B4513');
-    frameMaterial.metalness = isNearby ? 0.6 : 0.1;
-    frameMaterial.needsUpdate = true;
-  }, [isNearby, frameMaterial]);
 
   // Dispose frame material on unmount
   useEffect(() => {
@@ -97,10 +107,15 @@ export function ArtworkFrame({
     };
   }, [plaqueMaterial]);
 
-  const handleClick = onClick && artifact ? onClick : undefined;
+  // Truncate long titles
+  const displayTitle = artifact?.name
+    ? artifact.name.length > 20
+      ? artifact.name.substring(0, 18) + '...'
+      : artifact.name
+    : '';
 
   return (
-    <group ref={groupRef} position={position} rotation={rotation} onClick={handleClick}>
+    <group ref={groupRef} position={position} rotation={rotation} onClick={artifact ? handleClick : undefined}>
       {/* Frame border */}
       <mesh castShadow>
         <boxGeometry args={[FRAME_WIDTH + BORDER_WIDTH * 2, FRAME_HEIGHT + BORDER_WIDTH * 2, FRAME_DEPTH]} />
@@ -121,17 +136,43 @@ export function ArtworkFrame({
         position={[0, 0.8, 0.5]}
         angle={0.4}
         penumbra={0.5}
-        intensity={isNearby ? 2 : 1}
+        intensity={1.2}
         color="#FFF8DC"
         castShadow={false}
       />
 
-      {/* Name plaque */}
-      {isNearby && (
-        <mesh position={[0, -(FRAME_HEIGHT / 2 + 0.15), 0.05]}>
-          <planeGeometry args={[0.8, 0.12]} />
-          <primitive object={plaqueMaterial} attach="material" />
-        </mesh>
+      {/* Title label below frame */}
+      {artifact && (
+        <group position={[0, -(FRAME_HEIGHT / 2 + 0.12), 0.05]}>
+          {/* Plaque background */}
+          <mesh>
+            <planeGeometry args={[FRAME_WIDTH, 0.15]} />
+            <primitive object={plaqueMaterial} attach="material" />
+          </mesh>
+          {/* Title text */}
+          <Text
+            position={[0, 0, 0.01]}
+            fontSize={0.06}
+            color="#D4AF37"
+            anchorX="center"
+            anchorY="middle"
+            maxWidth={FRAME_WIDTH - 0.1}
+          >
+            {displayTitle}
+          </Text>
+          {/* Variant indicator */}
+          {allImages.length > 1 && (
+            <Text
+              position={[0, -0.055, 0.01]}
+              fontSize={0.035}
+              color="#888888"
+              anchorX="center"
+              anchorY="middle"
+            >
+              {currentImage?.label} ({displayIndex + 1}/{allImages.length})
+            </Text>
+          )}
+        </group>
       )}
     </group>
   );
