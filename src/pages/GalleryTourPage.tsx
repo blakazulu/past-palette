@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, Suspense } from 'react';
+import { useState, useEffect, useMemo, useCallback, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Canvas } from '@react-three/fiber';
 import { useProgress, Html } from '@react-three/drei';
@@ -8,6 +8,7 @@ import {
   ArtworkFrame,
   FirstPersonControls,
   TouchControls,
+  MobileJoystickUI,
 } from '@/components/gallery-tour';
 import {
   GalleryColumns,
@@ -80,7 +81,37 @@ export function GalleryTourPage() {
   const [error, setError] = useState<string | null>(null);
   const [showInstructions, setShowInstructions] = useState(true);
 
+  // Mobile joystick state
+  const [rotationInput, setRotationInput] = useState(0);
+  const [movementInput, setMovementInput] = useState(0);
+  const [currentFrameIndex, setCurrentFrameIndex] = useState(0);
+  const [teleportTarget, setTeleportTarget] = useState<[number, number, number] | null>(null);
+
   const isMobile = useMemo(() => /iPhone|iPad|iPod|Android/i.test(navigator.userAgent), []);
+
+  // Teleport to next artifact with a frame
+  const handleTeleportNext = useCallback(() => {
+    // Find frames that have artifacts
+    const framesWithArtifacts = FRAME_POSITIONS
+      .map((frame, index) => ({ frame, index }))
+      .filter(({ index }) => artifacts[index]);
+
+    if (framesWithArtifacts.length === 0) return;
+
+    // Find next frame with an artifact
+    let nextIndex = currentFrameIndex + 1;
+    if (nextIndex >= framesWithArtifacts.length) {
+      nextIndex = 0; // Loop back to first
+    }
+
+    const target = framesWithArtifacts[nextIndex];
+    setCurrentFrameIndex(nextIndex);
+    setTeleportTarget(target.frame.position);
+  }, [artifacts, currentFrameIndex]);
+
+  const handleTeleportComplete = useCallback(() => {
+    setTeleportTarget(null);
+  }, []);
 
   // Check WebGL support
   const hasWebGL = useMemo(() => {
@@ -211,7 +242,13 @@ export function GalleryTourPage() {
           ))}
 
           {isMobile ? (
-            <TouchControls enabled={!showInstructions} />
+            <TouchControls
+              enabled={!showInstructions}
+              rotationInput={rotationInput}
+              movementInput={movementInput}
+              teleportTarget={teleportTarget}
+              onTeleportComplete={handleTeleportComplete}
+            />
           ) : (
             <FirstPersonControls enabled={!showInstructions} />
           )}
@@ -228,8 +265,9 @@ export function GalleryTourPage() {
             <div className="text-obsidian-300 text-sm space-y-2 mb-6">
               {isMobile ? (
                 <>
-                  <p>{t('galleryTour.mobileMove', 'Use left side to move')}</p>
-                  <p>{t('galleryTour.mobileLook', 'Drag right side to look around')}</p>
+                  <p>{t('galleryTour.mobileTurn', 'Left joystick to turn')}</p>
+                  <p>{t('galleryTour.mobileMove', 'Right slider to move forward/backward')}</p>
+                  <p>{t('galleryTour.mobileTeleport', 'Tap "Next" button to jump to artwork')}</p>
                   <p>{t('galleryTour.mobileTap', 'Tap artwork to cycle color variants')}</p>
                 </>
               ) : (
@@ -269,6 +307,16 @@ export function GalleryTourPage() {
         <div className="absolute top-4 left-4 px-3 py-1.5 bg-obsidian-800/80 text-obsidian-300 rounded-lg backdrop-blur-sm text-sm border border-obsidian-600">
           {artifacts.length} {t('galleryTour.artworks', 'artworks')}
         </div>
+      )}
+
+      {/* Mobile joystick controls */}
+      {isMobile && (
+        <MobileJoystickUI
+          visible={!showInstructions}
+          onRotationChange={setRotationInput}
+          onMovementChange={setMovementInput}
+          onTeleportNext={handleTeleportNext}
+        />
       )}
     </div>
   );
