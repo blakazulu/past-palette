@@ -13,8 +13,8 @@ const LAMP_LIGHT_CONFIG = {
 };
 
 // 6 lamp positions arranged in a circle around the chandelier
-// The chandelier arms extend roughly 0.3m from center after scaling
-const LAMP_RADIUS = 0.35;
+// Spread lights wider to illuminate more of the room
+const LAMP_RADIUS = 1.2;
 const LAMP_HEIGHT_OFFSET = -0.15; // Slightly below chandelier center
 const NUM_LAMPS = 6;
 
