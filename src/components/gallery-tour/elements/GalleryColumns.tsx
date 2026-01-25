@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 
 interface ColumnProps {
@@ -8,7 +8,6 @@ interface ColumnProps {
 }
 
 function DoricColumn({ position, radius = 0.5, height = 6 }: ColumnProps) {
-  const groupRef = useRef<THREE.Group>(null);
 
   // Column shaft geometry
   const shaftGeometry = useMemo(() => {
@@ -56,7 +55,7 @@ function DoricColumn({ position, radius = 0.5, height = 6 }: ColumnProps) {
   const abacusY = height + 0.3 + 0.25 + 0.1;
 
   return (
-    <group ref={groupRef} position={position}>
+    <group position={position}>
       {/* Base */}
       <mesh geometry={baseGeometry} material={material} position={[0, baseY, 0]} />
 
