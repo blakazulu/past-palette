@@ -88,14 +88,6 @@ function generateColumnVineData(columnIndex: number): ColumnVineData {
       const x = Math.cos(angle) * radiusVariation;
       const z = Math.sin(angle) * radiusVariation;
 
-      // Segment orientation follows the spiral
-      const nextT = (i + 1) / totalSegments;
-      const nextAngle = strandStartAngle + nextT * spiralTurns * Math.PI * 2;
-      const tangentAngle = Math.atan2(
-        Math.sin(nextAngle) - Math.sin(angle),
-        Math.cos(nextAngle) - Math.cos(angle)
-      );
-
       segments.push({
         position: [x, y, z],
         rotation: [0, -angle + Math.PI / 2, Math.PI / 12], // Slight upward tilt
