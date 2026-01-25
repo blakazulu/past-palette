@@ -50,10 +50,8 @@ interface SettingsState {
   galleryElements: {
     columns: boolean;
     centralDisplay: boolean;
-    alcoves: boolean;
     floorMosaic: boolean;
     plants: boolean;
-    statues: boolean;
   };
   // Actions
   setLanguage: (language: 'en' | 'he') => void;
@@ -73,10 +71,8 @@ export const useSettingsStore = create<SettingsState>()(
       galleryElements: {
         columns: true,
         centralDisplay: true,
-        alcoves: true,
         floorMosaic: true,
         plants: true,
-        statues: true,
       },
 
       setLanguage: (language) => set({ language }),

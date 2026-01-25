@@ -14,10 +14,8 @@ import {
 import {
   GalleryColumns,
   CentralPedestal,
-  WallAlcoves,
   FloorMosaic,
   GalleryPlants,
-  GalleryStatues,
 } from '@/components/gallery-tour/elements';
 import { fetchGalleryArtifacts } from '@/lib/firebase/galleryService';
 import type { GalleryArtifact } from '@/types/gallery';
@@ -63,10 +61,8 @@ function formatElementLabel(key: string): string {
   const labels: Record<string, string> = {
     columns: 'Columns',
     centralDisplay: 'Central Display',
-    alcoves: 'Wall Alcoves',
     floorMosaic: 'Floor Mosaic',
     plants: 'Plants',
-    statues: 'Statues',
   };
   return labels[key] || key;
 }
@@ -232,10 +228,8 @@ export function GalleryTourPage() {
           {/* Gallery decorative elements */}
           {galleryElements.columns && <GalleryColumns />}
           {galleryElements.centralDisplay && <CentralPedestal />}
-          {galleryElements.alcoves && <WallAlcoves />}
           {galleryElements.floorMosaic && <FloorMosaic />}
           {galleryElements.plants && <GalleryPlants />}
-          {galleryElements.statues && <GalleryStatues />}
 
           {/* Render all frame positions - with or without artifacts */}
           {FRAME_POSITIONS.map((framePos, index) => {
