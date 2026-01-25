@@ -8,13 +8,13 @@ const CHANDELIER_MODEL_PATH = '/models/Chandelier_01_1k.gltf';
 const LAMP_LIGHT_CONFIG = {
   color: '#FFE4B5', // Warm moccasin color
   intensity: 2.5,
-  distance: 15,
+  distance: 20,
   decay: 2,
 };
 
 // 6 lamp positions arranged in a circle around the chandelier
 // Spread lights wider to illuminate more of the room
-const LAMP_RADIUS = 1.2;
+const LAMP_RADIUS = 1.6;
 const LAMP_HEIGHT_OFFSET = -0.15; // Slightly below chandelier center
 const NUM_LAMPS = 6;
 
@@ -105,8 +105,8 @@ export function Chandelier() {
       <pointLight
         position={[0, -0.1, 0]}
         color={LAMP_LIGHT_CONFIG.color}
-        intensity={1.8}
-        distance={12}
+        intensity={2.2}
+        distance={14}
         decay={2}
       />
     </group>

@@ -6,6 +6,7 @@
   "description": "AI colorization PWA for archaeology artifacts with historically accurate cultural palettes",
   "scripts": {
     "dev": "vite",
+    "dev:netlify": "netlify dev",
     "update-version": "node scripts/update-version.js",
     "build": "npm run update-version && tsc -b && vite build",
     "preview": "vite preview",
