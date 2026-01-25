@@ -180,7 +180,8 @@
     "noWebGL": "הדפדפן שלך לא תומך בגרפיקה תלת מימדית.",
     "viewGrid": "צפייה בגלריה",
     "artworks": "יצירות",
-    "loadingArtworks": "טוען יצירות..."
+    "loadingArtworks": "טוען יצירות...",
+    "customize": "התאמת הגלריה"
   },
   "upload": {
     "uploading": "מעלה לגלריה...",

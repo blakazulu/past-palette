@@ -12,7 +12,6 @@ const WALL_THICKNESS = 0.2;
 
 // Room dimensions (from GalleryRoom)
 const ROOM_WIDTH = 32;
-const ROOM_HEIGHT = 8;
 
 // Alcove positions along the z-axis
 const ALCOVE_POSITIONS_Z = [-6, 4];

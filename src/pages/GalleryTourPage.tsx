@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Canvas } from '@react-three/fiber';
 import { useProgress, Html } from '@react-three/drei';
 import { useTranslation } from 'react-i18next';
+import { useSettingsStore } from '@/stores/appStore';
 import {
   GalleryRoom,
   ArtworkFrame,
@@ -10,6 +11,14 @@ import {
   TouchControls,
   ArtworkInfoOverlay,
 } from '@/components/gallery-tour';
+import {
+  GalleryColumns,
+  CentralPedestal,
+  WallAlcoves,
+  FloorMosaic,
+  GalleryPlants,
+  GalleryStatues,
+} from '@/components/gallery-tour/elements';
 import { fetchGalleryArtifacts } from '@/lib/firebase/galleryService';
 import type { GalleryArtifact } from '@/types/gallery';
 
@@ -48,6 +57,21 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 /**
+ * Format camelCase keys to readable labels
+ */
+function formatElementLabel(key: string): string {
+  const labels: Record<string, string> = {
+    columns: 'Columns',
+    centralDisplay: 'Central Display',
+    alcoves: 'Wall Alcoves',
+    floorMosaic: 'Floor Mosaic',
+    plants: 'Plants',
+    statues: 'Statues',
+  };
+  return labels[key] || key;
+}
+
+/**
  * Loading indicator shown inside the 3D canvas while resources load
  */
 function Loader() {
@@ -73,6 +97,10 @@ export function GalleryTourPage() {
   const [nearbyArtifact, setNearbyArtifact] = useState<GalleryArtifact | null>(null);
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [showInstructions, setShowInstructions] = useState(true);
+  const [showCustomize, setShowCustomize] = useState(false);
+
+  // Gallery element settings
+  const { galleryElements, setGalleryElement } = useSettingsStore();
 
   // Track variant index per artifact for when user switches variants
   const [artifactVariantMap, setArtifactVariantMap] = useState<Record<string, number>>({});
@@ -201,6 +229,14 @@ export function GalleryTourPage() {
         <Suspense fallback={<Loader />}>
           <GalleryRoom />
 
+          {/* Gallery decorative elements */}
+          {galleryElements.columns && <GalleryColumns />}
+          {galleryElements.centralDisplay && <CentralPedestal />}
+          {galleryElements.alcoves && <WallAlcoves />}
+          {galleryElements.floorMosaic && <FloorMosaic />}
+          {galleryElements.plants && <GalleryPlants />}
+          {galleryElements.statues && <GalleryStatues />}
+
           {/* Render all frame positions - with or without artifacts */}
           {FRAME_POSITIONS.map((framePos, index) => {
             const artifact = artifacts[index] || null;
@@ -250,6 +286,38 @@ export function GalleryTourPage() {
                 </>
               )}
             </div>
+
+            {/* Customize Gallery Section */}
+            <div className="mb-4">
+              <button
+                type="button"
+                onClick={() => setShowCustomize(!showCustomize)}
+                className="text-obsidian-400 hover:text-obsidian-200 text-sm flex items-center gap-1 mx-auto"
+              >
+                <span>{showCustomize ? '▲' : '▼'}</span>
+                <span>{t('galleryTour.customize', 'Customize Gallery')}</span>
+              </button>
+
+              {showCustomize && (
+                <div className="mt-3 grid grid-cols-2 gap-2 text-left">
+                  {(Object.keys(galleryElements) as Array<keyof typeof galleryElements>).map((key) => (
+                    <label
+                      key={key}
+                      className="flex items-center gap-2 text-obsidian-300 text-sm cursor-pointer hover:text-obsidian-100"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={galleryElements[key]}
+                        onChange={(e) => setGalleryElement(key, e.target.checked)}
+                        className="w-4 h-4 rounded border-obsidian-600 bg-obsidian-800 text-gold-500 focus:ring-gold-500"
+                      />
+                      {formatElementLabel(key)}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <button
               type="button"
               onClick={() => setShowInstructions(false)}

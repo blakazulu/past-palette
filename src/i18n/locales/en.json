@@ -180,7 +180,8 @@
     "noWebGL": "Your browser does not support 3D graphics.",
     "viewGrid": "View Grid Gallery",
     "artworks": "artworks",
-    "loadingArtworks": "Loading artworks..."
+    "loadingArtworks": "Loading artworks...",
+    "customize": "Customize Gallery"
   },
   "upload": {
     "uploading": "Uploading to gallery...",
