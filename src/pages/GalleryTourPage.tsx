@@ -15,6 +15,9 @@ import {
   CentralPedestal,
   FloorMosaic,
   GalleryPlants,
+  Chandelier,
+  WallSconces,
+  ColumnVines,
 } from '@/components/gallery-tour/elements';
 import { fetchGalleryArtifacts } from '@/lib/firebase/galleryService';
 import type { GalleryArtifact } from '@/types/gallery';
@@ -213,6 +216,13 @@ export function GalleryTourPage() {
           <CentralPedestal />
           <FloorMosaic />
           <GalleryPlants />
+
+          {/* Lighting */}
+          <Chandelier />
+          <WallSconces />
+
+          {/* Textured ivy vines on columns */}
+          <ColumnVines />
 
           {/* Render all frame positions - with or without artifacts */}
           {FRAME_POSITIONS.map((framePos, index) => {

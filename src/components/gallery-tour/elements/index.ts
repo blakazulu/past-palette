@@ -4,3 +4,6 @@ export { GalleryColumns } from './GalleryColumns';
 export { CentralPedestal } from './CentralPedestal';
 export { FloorMosaic } from './FloorMosaic';
 export { GalleryPlants } from './GalleryPlants';
+export { Chandelier } from './Chandelier';
+export { WallSconces } from './WallSconces';
+export { ColumnVines } from './ColumnVines';
