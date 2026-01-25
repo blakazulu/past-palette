@@ -164,51 +164,25 @@ export function GalleryRoom() {
         <primitive object={wallMaterial} attach="material" />
       </mesh>
 
-      {/* Ambient lighting - increased for brighter room */}
-      <ambientLight intensity={0.6} color="#FFF8DC" />
+      {/* Ambient lighting - reduced since sconces and chandelier provide atmosphere */}
+      <ambientLight intensity={0.3} color="#FFF8DC" />
 
-      {/* Main directional light */}
+      {/* Main directional light - reduced for more atmospheric feel */}
       <directionalLight
         position={[5, ROOM_HEIGHT - 0.5, 5]}
-        intensity={0.8}
+        intensity={0.4}
         color="#FFFFFF"
         castShadow
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
       />
 
-      {/* Fill light */}
+      {/* Fill light - subtle */}
       <directionalLight
         position={[-5, ROOM_HEIGHT - 0.5, -5]}
-        intensity={0.5}
+        intensity={0.2}
         color="#E6E6FA"
       />
-
-      {/* Ceiling light fixtures - 3 rows of 3 */}
-      {[-8, 0, 8].map((x) =>
-        [-8, 0, 8].map((z) => (
-          <group key={`light-${x}-${z}`} position={[x, ROOM_HEIGHT - 0.1, z]}>
-            {/* Light fixture housing */}
-            <mesh>
-              <cylinderGeometry args={[0.3, 0.4, 0.15, 16]} />
-              <meshStandardMaterial color="#2a2a2a" metalness={0.8} roughness={0.3} />
-            </mesh>
-            {/* Light bulb glow */}
-            <mesh position={[0, -0.1, 0]}>
-              <sphereGeometry args={[0.15, 16, 16]} />
-              <meshBasicMaterial color="#FFF8DC" />
-            </mesh>
-            {/* Point light for actual illumination */}
-            <pointLight
-              position={[0, -0.3, 0]}
-              intensity={1.5}
-              distance={15}
-              color="#FFF8DC"
-              decay={2}
-            />
-          </group>
-        ))
-      )}
 
       {/* Fog for depth - lighter for brighter room */}
       <fog attach="fog" args={['#2a2a3e', 35, 80]} />
