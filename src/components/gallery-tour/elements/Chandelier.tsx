@@ -7,8 +7,8 @@ const CHANDELIER_MODEL_PATH = '/models/Chandelier_01_1k.gltf';
 // Point light configuration for chandelier lamps
 const LAMP_LIGHT_CONFIG = {
   color: '#FFE4B5', // Warm moccasin color
-  intensity: 1.2,
-  distance: 12,
+  intensity: 2.5,
+  distance: 15,
   decay: 2,
 };
 
@@ -105,8 +105,8 @@ export function Chandelier() {
       <pointLight
         position={[0, -0.1, 0]}
         color={LAMP_LIGHT_CONFIG.color}
-        intensity={0.8}
-        distance={8}
+        intensity={1.8}
+        distance={12}
         decay={2}
       />
     </group>

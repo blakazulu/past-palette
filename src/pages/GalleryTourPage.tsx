@@ -14,7 +14,6 @@ import {
   GalleryColumns,
   CentralPedestal,
   FloorMosaic,
-  GalleryPlants,
   Chandelier,
   WallSconces,
   ColumnVines,
@@ -215,7 +214,6 @@ export function GalleryTourPage() {
           <GalleryColumns />
           <CentralPedestal />
           <FloorMosaic />
-          <GalleryPlants />
 
           {/* Lighting */}
           <Chandelier />
