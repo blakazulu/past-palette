@@ -11,8 +11,8 @@ const BRONZE_NORMAL_URL = '/textures/bronze_normal.jpg';
 // Point light configuration for sconces
 const SCONCE_LIGHT_CONFIG = {
   color: '#FFE4B5', // Warm moccasin
-  intensity: 0.8,
-  distance: 8,
+  intensity: 2.0,
+  distance: 12,
   decay: 2,
 };
 
