@@ -47,11 +47,20 @@ interface SettingsState {
   defaultColorScheme: ColorScheme;
   includeRestoration: boolean;
   hapticsEnabled: boolean;
+  galleryElements: {
+    columns: boolean;
+    centralDisplay: boolean;
+    alcoves: boolean;
+    floorMosaic: boolean;
+    plants: boolean;
+    statues: boolean;
+  };
   // Actions
   setLanguage: (language: 'en' | 'he') => void;
   setDefaultColorScheme: (scheme: ColorScheme) => void;
   setIncludeRestoration: (include: boolean) => void;
   setHapticsEnabled: (enabled: boolean) => void;
+  setGalleryElement: (key: keyof SettingsState['galleryElements'], value: boolean) => void;
 }
 
 export const useSettingsStore = create<SettingsState>()(
@@ -61,11 +70,23 @@ export const useSettingsStore = create<SettingsState>()(
       defaultColorScheme: 'original',
       includeRestoration: false,
       hapticsEnabled: true,
+      galleryElements: {
+        columns: true,
+        centralDisplay: true,
+        alcoves: true,
+        floorMosaic: true,
+        plants: true,
+        statues: true,
+      },
 
       setLanguage: (language) => set({ language }),
       setDefaultColorScheme: (scheme) => set({ defaultColorScheme: scheme }),
       setIncludeRestoration: (include) => set({ includeRestoration: include }),
       setHapticsEnabled: (enabled) => set({ hapticsEnabled: enabled }),
+      setGalleryElement: (key, value) =>
+        set((state) => ({
+          galleryElements: { ...state.galleryElements, [key]: value },
+        })),
     }),
     {
       name: 'past-palette-settings',
