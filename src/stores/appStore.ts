@@ -66,7 +66,7 @@ export const useSettingsStore = create<SettingsState>()(
     (set) => ({
       language: 'en',
       defaultColorScheme: 'original',
-      includeRestoration: false,
+      includeRestoration: true,
       hapticsEnabled: true,
       galleryElements: {
         columns: true,

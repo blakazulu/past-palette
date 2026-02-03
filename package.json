@@ -1,6 +1,6 @@
 {
   "name": "past-palette",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "description": "AI colorization PWA for archaeology artifacts with historically accurate cultural palettes",

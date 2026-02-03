@@ -15,6 +15,23 @@ Ancient sculptures, pottery, and artifacts were originally painted in vibrant co
 3. **Colorize** - AI applies historically accurate colors
 4. **Compare** - Slide between original and colorized versions
 
+## How the AI Works
+
+The app uses Google's Gemini AI - a model that learned from billions of images paired with descriptions. It doesn't analyze images like traditional software. Instead, it works more like a human who's seen millions of museum pieces.
+
+**For identifying what's in the photo:**
+- The AI looks at shapes, textures, and context
+- It recognizes patterns from its training ("handles + clay + ancient form" → probably an amphora)
+- We ask it: "What is this artifact in 2-3 words?" and it responds based on what it's learned
+
+**For colorization:**
+- The AI doesn't "paint over" the photo - it creates a brand new image
+- We give it the original photo plus a description of historically accurate colors
+- For example: "Use Egyptian colors: lapis lazuli blue, gold, turquoise, emerald green..."
+- It generates a colorized version that keeps the artifact's shape but adds period-appropriate colors
+
+Think of it like showing a photo to an art historian who's memorized thousands of artifacts and ancient color palettes - they can recognize what it is and imagine how it originally looked.
+
 ## Historical Color Palettes
 
 - **Egyptian** - Sacred lapis blue, gold, turquoise, and emerald green
