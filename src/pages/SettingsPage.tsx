@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSettingsStore } from '@/stores/appStore';
+import { optimizeGalleryImages } from '@/lib/firebase/galleryService';
 import type { ColorScheme } from '@/types/artifact';
 
 const colorSchemeOptions: { id: ColorScheme; labelKey: string; color: string }[] = [
@@ -23,6 +25,27 @@ export function SettingsPage() {
     hapticsEnabled,
     setHapticsEnabled,
   } = useSettingsStore();
+
+  const [optimizeState, setOptimizeState] = useState<'idle' | 'running' | 'done' | 'error'>('idle');
+  const [optimizeProgress, setOptimizeProgress] = useState({ current: 0, total: 0 });
+  const [optimizeResult, setOptimizeResult] = useState({ optimized: 0, skipped: 0, failed: 0 });
+  const [optimizeError, setOptimizeError] = useState('');
+
+  const handleOptimize = async () => {
+    if (optimizeState === 'running') return;
+    setOptimizeState('running');
+    setOptimizeProgress({ current: 0, total: 0 });
+    try {
+      const result = await optimizeGalleryImages(({ current, total }) => {
+        setOptimizeProgress({ current, total });
+      });
+      setOptimizeResult({ optimized: result.optimized, skipped: result.skipped, failed: result.failed });
+      setOptimizeState('done');
+    } catch (err) {
+      setOptimizeError(err instanceof Error ? err.message : String(err));
+      setOptimizeState('error');
+    }
+  };
 
   const handleLanguageChange = (newLang: 'en' | 'he') => {
     setLanguage(newLang);
@@ -127,11 +150,66 @@ export function SettingsPage() {
           </div>
         </SettingCard>
 
+        {/* Gallery Optimization */}
+        <SettingCard
+          icon={<StorageIcon className="w-5 h-5" />}
+          title={t('settings.gallery')}
+          description={t('settings.optimizeImagesDesc')}
+          delay={400}
+        >
+          {optimizeState === 'idle' && (
+            <button
+              onClick={handleOptimize}
+              className="w-full py-3 rounded-xl font-display text-sm tracking-wider text-obsidian-950 bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 transition-all duration-300"
+            >
+              {t('settings.optimizeImages')}
+            </button>
+          )}
+          {optimizeState === 'running' && (
+            <div className="space-y-3">
+              <div className="w-full h-2 rounded-full bg-obsidian-800 overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-gold-500 to-gold-400 transition-all duration-300"
+                  style={{ width: optimizeProgress.total > 0 ? `${(optimizeProgress.current / optimizeProgress.total) * 100}%` : '0%' }}
+                />
+              </div>
+              <p className="text-sm text-obsidian-400 text-center">
+                {t('settings.optimizing', { current: optimizeProgress.current, total: optimizeProgress.total })}
+              </p>
+            </div>
+          )}
+          {optimizeState === 'done' && (
+            <div className="text-sm text-center space-y-1">
+              <p className="text-green-400">
+                {t('settings.optimizeDone', { optimized: optimizeResult.optimized, skipped: optimizeResult.skipped })}
+              </p>
+              {optimizeResult.failed > 0 && (
+                <p className="text-red-400">
+                  {t('settings.optimizeFailed', { failed: optimizeResult.failed })}
+                </p>
+              )}
+            </div>
+          )}
+          {optimizeState === 'error' && (
+            <div className="space-y-3 text-center">
+              <p className="text-sm text-red-400">
+                {t('settings.optimizeError')}: {optimizeError}
+              </p>
+              <button
+                onClick={handleOptimize}
+                className="px-5 py-2.5 rounded-xl font-display text-sm tracking-wider text-obsidian-950 bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 transition-all duration-300"
+              >
+                {t('common.tryAgain')}
+              </button>
+            </div>
+          )}
+        </SettingCard>
+
         {/* About Section */}
         <SettingCard
           icon={<InfoIcon className="w-5 h-5" />}
           title={t('settings.about')}
-          delay={400}
+          delay={500}
         >
           <div className="flex items-center justify-between">
             <div>
@@ -147,7 +225,7 @@ export function SettingsPage() {
       </div>
 
       {/* Footer decoration */}
-      <div className="mt-12 flex items-center justify-center gap-3 opacity-0-initial animate-reveal-fade delay-500">
+      <div className="mt-12 flex items-center justify-center gap-3 opacity-0-initial animate-reveal-fade delay-600">
         <div className="w-12 h-px bg-gradient-to-r from-transparent via-gold-600/30 to-transparent" />
         <AnkhIcon className="w-4 h-4 text-gold-500/30" />
         <div className="w-12 h-px bg-gradient-to-l from-transparent via-gold-600/30 to-transparent" />
@@ -284,6 +362,14 @@ function SparklesIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+    </svg>
+  );
+}
+
+function StorageIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
     </svg>
   );
 }

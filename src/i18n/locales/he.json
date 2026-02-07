@@ -132,7 +132,14 @@
     "haptics": "משוב רטט",
     "hapticsDesc": "רטט בתגובה לפעולות",
     "about": "אודות",
-    "version": "גרסה"
+    "version": "גרסה",
+    "gallery": "גלריה",
+    "optimizeImages": "אופטימיזציה לתמונות הגלריה",
+    "optimizeImagesDesc": "שינוי גודל כל התמונות להקטנת נפח האחסון",
+    "optimizing": "מייעל תמונה {{current}} מתוך {{total}}...",
+    "optimizeDone": "הושלם! {{optimized}} עודכנו, {{skipped}} כבר אופטימליות",
+    "optimizeFailed": "{{failed}} נכשלו",
+    "optimizeError": "האופטימיזציה נכשלה"
   },
   "common": {
     "loading": "טוען...",

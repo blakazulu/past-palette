@@ -132,7 +132,14 @@
     "haptics": "Haptic Feedback",
     "hapticsDesc": "Vibration feedback on actions",
     "about": "About",
-    "version": "Version"
+    "version": "Version",
+    "gallery": "Gallery",
+    "optimizeImages": "Optimize Gallery Images",
+    "optimizeImagesDesc": "Resize all uploaded images to reduce storage",
+    "optimizing": "Optimizing image {{current}} of {{total}}...",
+    "optimizeDone": "Done! {{optimized}} optimized, {{skipped}} already optimal",
+    "optimizeFailed": "{{failed}} failed",
+    "optimizeError": "Optimization failed"
   },
   "common": {
     "loading": "Loading...",

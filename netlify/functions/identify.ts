@@ -49,7 +49,7 @@ export const handler: Handler = async (event) => {
 
     // Initialize Gemini
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     // Ask model to identify the artifact
     const prompt = `Look at this archaeological artifact image. Identify what it is in exactly 2-3 words.

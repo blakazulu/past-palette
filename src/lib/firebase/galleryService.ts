@@ -9,7 +9,7 @@ import {
   where,
   serverTimestamp,
 } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL, getBlob } from 'firebase/storage';
 import { firestore, storage } from './config';
 import { db } from '@/lib/db';
 import { getDeviceId } from '@/lib/utils/deviceId';
@@ -18,9 +18,14 @@ import type { GalleryArtifact } from '@/types/gallery';
 const GALLERY_COLLECTION = 'gallery_artifacts';
 
 /**
- * Generate a thumbnail from a blob (400px max dimension, JPEG 0.8 quality)
+ * Resize a blob to fit within maxDimension and encode as JPEG.
+ * Returns the smaller of the original and re-encoded blob to avoid size inflation.
  */
-async function generateThumbnail(blob: Blob): Promise<Blob> {
+export function resizeAsJpeg(
+  blob: Blob,
+  maxDimension: number,
+  quality: number
+): Promise<Blob> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const url = URL.createObjectURL(blob);
@@ -28,18 +33,17 @@ async function generateThumbnail(blob: Blob): Promise<Blob> {
     img.onload = () => {
       URL.revokeObjectURL(url);
 
-      const maxSize = 400;
       let { width, height } = img;
 
       if (width > height) {
-        if (width > maxSize) {
-          height = (height * maxSize) / width;
-          width = maxSize;
+        if (width > maxDimension) {
+          height = Math.round((height * maxDimension) / width);
+          width = maxDimension;
         }
       } else {
-        if (height > maxSize) {
-          width = (width * maxSize) / height;
-          height = maxSize;
+        if (height > maxDimension) {
+          width = Math.round((width * maxDimension) / height);
+          height = maxDimension;
         }
       }
 
@@ -57,14 +61,15 @@ async function generateThumbnail(blob: Blob): Promise<Blob> {
 
       canvas.toBlob(
         (result) => {
-          if (result) {
-            resolve(result);
-          } else {
-            reject(new Error('Failed to generate thumbnail'));
+          if (!result) {
+            reject(new Error('Failed to encode image'));
+            return;
           }
+          // Return the smaller of original vs re-encoded to avoid size inflation
+          resolve(result.size < blob.size ? result : blob);
         },
         'image/jpeg',
-        0.8
+        quality
       );
     };
 
@@ -75,6 +80,20 @@ async function generateThumbnail(blob: Blob): Promise<Blob> {
 
     img.src = url;
   });
+}
+
+/**
+ * Generate a thumbnail from a blob (400px max dimension, JPEG 0.8 quality)
+ */
+function generateThumbnail(blob: Blob): Promise<Blob> {
+  return resizeAsJpeg(blob, 400, 0.8);
+}
+
+/**
+ * Optimize an image for upload (1280px max dimension, JPEG 0.8 quality)
+ */
+function optimizeForUpload(blob: Blob): Promise<Blob> {
+  return resizeAsJpeg(blob, 1280, 0.8);
 }
 
 /**
@@ -106,16 +125,18 @@ export async function uploadToGallery(artifactId: string): Promise<string> {
   await uploadBytes(thumbnailRef, thumbnail);
   const thumbnailUrl = await getDownloadURL(thumbnailRef);
 
-  // Upload original image
+  // Upload original image (optimized)
+  const optimizedOriginal = await optimizeForUpload(primaryImage.blob);
   const originalRef = ref(storage, `gallery/originals/${artifactId}.jpg`);
-  await uploadBytes(originalRef, primaryImage.blob);
+  await uploadBytes(originalRef, optimizedOriginal);
   const originalImageUrl = await getDownloadURL(originalRef);
 
   // Upload all variants
   const uploadedVariants = await Promise.all(
     variants.map(async (variant) => {
+      const optimizedVariant = await optimizeForUpload(variant.blob);
       const variantRef = ref(storage, `gallery/variants/${variant.id}.jpg`);
-      await uploadBytes(variantRef, variant.blob);
+      await uploadBytes(variantRef, optimizedVariant);
       const imageUrl = await getDownloadURL(variantRef);
 
       const variantData: Record<string, unknown> = {
@@ -190,4 +211,58 @@ export async function fetchGalleryArtifacts(count = 30): Promise<GalleryArtifact
       imageUrl: proxyImageUrl(variant.imageUrl),
     })),
   }));
+}
+
+/**
+ * Download, optimize, and re-upload all gallery images.
+ * Works client-side — no service account needed.
+ */
+export async function optimizeGalleryImages(
+  onProgress: (progress: { current: number; total: number }) => void
+): Promise<{ optimized: number; skipped: number; failed: number; total: number }> {
+  // Query all published gallery artifacts (no limit)
+  const q = query(
+    collection(firestore, GALLERY_COLLECTION),
+    where('status', '==', 'published')
+  );
+  const snapshot = await getDocs(q);
+  const artifacts = snapshot.docs.map((d) => d.data() as GalleryArtifact);
+
+  // Build flat list of storage paths
+  const paths: string[] = [];
+  for (const artifact of artifacts) {
+    paths.push(`gallery/originals/${artifact.id}.jpg`);
+    for (const variant of artifact.variants) {
+      paths.push(`gallery/variants/${variant.id}.jpg`);
+    }
+  }
+
+  const total = paths.length;
+  let optimized = 0;
+  let skipped = 0;
+  let failed = 0;
+
+  for (let i = 0; i < paths.length; i++) {
+    try {
+      const path = paths[i];
+      const storageRef = ref(storage, path);
+
+      const originalBlob = await getBlob(storageRef);
+      const optimizedBlob = await resizeAsJpeg(originalBlob, 1280, 0.8);
+
+      // resizeAsJpeg returns the same blob reference if the optimized version is larger
+      if (optimizedBlob.size >= originalBlob.size) {
+        skipped++;
+      } else {
+        await uploadBytes(storageRef, optimizedBlob);
+        optimized++;
+      }
+    } catch {
+      failed++;
+    }
+
+    onProgress({ current: i + 1, total });
+  }
+
+  return { optimized, skipped, failed, total };
 }

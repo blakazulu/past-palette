@@ -171,7 +171,7 @@ export const handler: Handler = async (event) => {
     // Initialize Gemini
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({
-      model: 'gemini-2.0-flash-exp',
+      model: 'gemini-2.5-flash-image',
       generationConfig: {
         // @ts-expect-error - responseModalities is a valid config but not in types yet
         responseModalities: ['TEXT', 'IMAGE'],
@@ -214,7 +214,7 @@ export const handler: Handler = async (event) => {
     const responseBody: ColorizeResponse = {
       success: true,
       colorizedImageBase64,
-      method: 'gemini-2.0-flash-exp',
+      method: 'gemini-2.5-flash-image',
       processingTimeMs,
     };
 
