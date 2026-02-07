@@ -9,7 +9,7 @@ import {
   where,
   serverTimestamp,
 } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL, getBlob } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { firestore, storage } from './config';
 import { db } from '@/lib/db';
 import { getDeviceId } from '@/lib/utils/deviceId';
@@ -247,7 +247,12 @@ export async function optimizeGalleryImages(
       const path = paths[i];
       const storageRef = ref(storage, path);
 
-      const originalBlob = await getBlob(storageRef);
+      // Download via image proxy to avoid CORS restrictions
+      const downloadUrl = await getDownloadURL(storageRef);
+      const proxyUrl = `/.netlify/functions/image-proxy?url=${encodeURIComponent(downloadUrl)}`;
+      const response = await fetch(proxyUrl);
+      if (!response.ok) throw new Error(`Download failed: ${response.status}`);
+      const originalBlob = await response.blob();
       const optimizedBlob = await resizeAsJpeg(originalBlob, 1280, 0.8);
 
       // resizeAsJpeg returns the same blob reference if the optimized version is larger
