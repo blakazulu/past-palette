@@ -271,3 +271,51 @@ export async function optimizeGalleryImages(
 
   return { optimized, skipped, failed, total };
 }
+
+/**
+ * Optimize all local IndexedDB images (originals + color variants).
+ */
+export async function optimizeLocalImages(
+  onProgress: (progress: { current: number; total: number }) => void
+): Promise<{ optimized: number; skipped: number; failed: number; total: number }> {
+  const allImages = await db.images.toArray();
+  const allVariants = await db.colorVariants.toArray();
+
+  const total = allImages.length + allVariants.length;
+  let optimized = 0;
+  let skipped = 0;
+  let failed = 0;
+  let current = 0;
+
+  for (const image of allImages) {
+    try {
+      const optimizedBlob = await resizeAsJpeg(image.blob, 1280, 0.8);
+      if (optimizedBlob.size >= image.blob.size) {
+        skipped++;
+      } else {
+        await db.images.update(image.id, { blob: optimizedBlob });
+        optimized++;
+      }
+    } catch {
+      failed++;
+    }
+    onProgress({ current: ++current, total });
+  }
+
+  for (const variant of allVariants) {
+    try {
+      const optimizedBlob = await resizeAsJpeg(variant.blob, 1280, 0.8);
+      if (optimizedBlob.size >= variant.blob.size) {
+        skipped++;
+      } else {
+        await db.colorVariants.update(variant.id, { blob: optimizedBlob });
+        optimized++;
+      }
+    } catch {
+      failed++;
+    }
+    onProgress({ current: ++current, total });
+  }
+
+  return { optimized, skipped, failed, total };
+}

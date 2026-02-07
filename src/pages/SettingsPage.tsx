@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSettingsStore } from '@/stores/appStore';
-import { optimizeGalleryImages } from '@/lib/firebase/galleryService';
+import { optimizeGalleryImages, optimizeLocalImages } from '@/lib/firebase/galleryService';
 import type { ColorScheme } from '@/types/artifact';
 
 const colorSchemeOptions: { id: ColorScheme; labelKey: string; color: string }[] = [
@@ -44,6 +44,27 @@ export function SettingsPage() {
     } catch (err) {
       setOptimizeError(err instanceof Error ? err.message : String(err));
       setOptimizeState('error');
+    }
+  };
+
+  const [localOptState, setLocalOptState] = useState<'idle' | 'running' | 'done' | 'error'>('idle');
+  const [localOptProgress, setLocalOptProgress] = useState({ current: 0, total: 0 });
+  const [localOptResult, setLocalOptResult] = useState({ optimized: 0, skipped: 0, failed: 0 });
+  const [localOptError, setLocalOptError] = useState('');
+
+  const handleLocalOptimize = async () => {
+    if (localOptState === 'running') return;
+    setLocalOptState('running');
+    setLocalOptProgress({ current: 0, total: 0 });
+    try {
+      const result = await optimizeLocalImages(({ current, total }) => {
+        setLocalOptProgress({ current, total });
+      });
+      setLocalOptResult({ optimized: result.optimized, skipped: result.skipped, failed: result.failed });
+      setLocalOptState('done');
+    } catch (err) {
+      setLocalOptError(err instanceof Error ? err.message : String(err));
+      setLocalOptState('error');
     }
   };
 
@@ -198,6 +219,56 @@ export function SettingsPage() {
               <button
                 onClick={handleOptimize}
                 className="px-5 py-2.5 rounded-xl font-display text-sm tracking-wider text-obsidian-950 bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 transition-all duration-300"
+              >
+                {t('common.tryAgain')}
+              </button>
+            </div>
+          )}
+
+          <div className="h-px bg-gradient-to-r from-transparent via-obsidian-700 to-transparent my-4" />
+          <p className="text-sm text-obsidian-500 mb-3">{t('settings.optimizeLocalDesc')}</p>
+
+          {localOptState === 'idle' && (
+            <button
+              onClick={handleLocalOptimize}
+              className="w-full py-3 rounded-xl font-display text-sm tracking-wider text-obsidian-200 bg-obsidian-800/80 border border-obsidian-700 hover:border-obsidian-600 hover:bg-obsidian-800 transition-all duration-300"
+            >
+              {t('settings.optimizeLocal')}
+            </button>
+          )}
+          {localOptState === 'running' && (
+            <div className="space-y-3">
+              <div className="w-full h-2 rounded-full bg-obsidian-800 overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-accent-500 to-accent-400 transition-all duration-300"
+                  style={{ width: localOptProgress.total > 0 ? `${(localOptProgress.current / localOptProgress.total) * 100}%` : '0%' }}
+                />
+              </div>
+              <p className="text-sm text-obsidian-400 text-center">
+                {t('settings.optimizing', { current: localOptProgress.current, total: localOptProgress.total })}
+              </p>
+            </div>
+          )}
+          {localOptState === 'done' && (
+            <div className="text-sm text-center space-y-1">
+              <p className="text-green-400">
+                {t('settings.optimizeDone', { optimized: localOptResult.optimized, skipped: localOptResult.skipped })}
+              </p>
+              {localOptResult.failed > 0 && (
+                <p className="text-red-400">
+                  {t('settings.optimizeFailed', { failed: localOptResult.failed })}
+                </p>
+              )}
+            </div>
+          )}
+          {localOptState === 'error' && (
+            <div className="space-y-3 text-center">
+              <p className="text-sm text-red-400">
+                {t('settings.optimizeError')}: {localOptError}
+              </p>
+              <button
+                onClick={handleLocalOptimize}
+                className="px-5 py-2.5 rounded-xl font-display text-sm tracking-wider text-obsidian-200 bg-obsidian-800/80 border border-obsidian-700 hover:border-obsidian-600 transition-all duration-300"
               >
                 {t('common.tryAgain')}
               </button>

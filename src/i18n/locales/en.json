@@ -138,6 +138,8 @@
     "optimizeImagesDesc": "Resize all uploaded images to reduce storage",
     "optimizing": "Optimizing image {{current}} of {{total}}...",
     "optimizeDone": "Done! {{optimized}} optimized, {{skipped}} already optimal",
+    "optimizeLocal": "Optimize Local Images",
+    "optimizeLocalDesc": "Resize images stored on this device",
     "optimizeFailed": "{{failed}} failed",
     "optimizeError": "Optimization failed"
   },

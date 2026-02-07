@@ -138,6 +138,8 @@
     "optimizeImagesDesc": "שינוי גודל כל התמונות להקטנת נפח האחסון",
     "optimizing": "מייעל תמונה {{current}} מתוך {{total}}...",
     "optimizeDone": "הושלם! {{optimized}} עודכנו, {{skipped}} כבר אופטימליות",
+    "optimizeLocal": "אופטימיזציה לתמונות מקומיות",
+    "optimizeLocalDesc": "שינוי גודל תמונות השמורות במכשיר",
     "optimizeFailed": "{{failed}} נכשלו",
     "optimizeError": "האופטימיזציה נכשלה"
   },
