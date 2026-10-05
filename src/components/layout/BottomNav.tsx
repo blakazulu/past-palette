@@ -13,7 +13,7 @@ export function BottomNav() {
   const { t } = useTranslation();
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-50 glass-panel-dark border-t border-gold-600/10 pb-safe">
+    <nav data-site-bottom-nav className="fixed bottom-0 inset-x-0 z-50 glass-panel-dark border-t border-gold-600/10 pb-safe">
       {/* Top gradient line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent" />
 
